@@ -1,10 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux';
 import './App.scss';
-import AuthorizationPage from './components/pages/AuthorizationPage/AuthorizationPage';
+import AppRouter from './components/AppRouter/AppRouter';
+import { checkAuth } from './store/slices/userSlice';
+import { useEffect } from 'react';
 
 function App() {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(localStorage.getItem('token')) {
+            dispatch(checkAuth())
+        }
+    }, [])
+
     return (
     <div className="App">
-        <AuthorizationPage/>
+        <AppRouter/>
     </div>
     );
 }
