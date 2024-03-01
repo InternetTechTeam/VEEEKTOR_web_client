@@ -1,0 +1,14 @@
+services:
+ frontend:
+  build: ./
+  restart: on-failure
+  command: npm start
+  volumes:
+   - "./src:/src"
+   - "modules:/node_modules"
+  stdin_open: true
+  ports:
+   - 3000:3000
+
+volumes:
+ modules:
