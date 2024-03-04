@@ -1,8 +1,8 @@
-import PageContent from "../components/PageContent/PageContent";
-import SignInForm from "../components/SIgnInForm/SignInForm";
-import SignUpForm from "../components/SignUpForm/SignUpForm";
-import AuthorizationPage from "../pages/AuthorizationPage/AuthorizationPage";
-import HomePage from "../pages/HomePage/HomePage";
+import PageContent from "../components/Common/PageContent/PageContent";
+import SignInForm from "../components/Common/SIgnInForm/SignInForm";
+import SignUpForm from "../components/Common/SignUpForm/SignUpForm";
+import AuthorizationPage from "../pages/Common/AuthorizationPage/AuthorizationPage";
+import HomePage from "../pages/Common/HomePage/HomePage";
 
 export const privateRoutes = [
     {

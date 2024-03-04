@@ -1,9 +1,9 @@
-import Input from '../UI/Input/Input';
-import Button from '../UI/Button/Button';
+import Input from '../../UI/Input/Input';
+import Button from '../../UI/Button/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signIn } from '../../store/slices/userSlice';
+import {signInUser } from '../../../store/slices/userSlice';
 
 const SignInForm = () => {
 
@@ -12,9 +12,9 @@ const SignInForm = () => {
 
   const dispatch = useDispatch();
 
-  const onSendForm = (e) => {
+  const onSendForm = async (e) => {
     e.preventDefault();
-    dispatch(signIn({}))
+    dispatch(signInUser({email, password}))
     setEmail('');
     setPassword('');
   }

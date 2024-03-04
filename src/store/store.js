@@ -7,7 +7,7 @@ export const setupStore = () => {
     return configureStore({
         reducer: 
         {
-            user: userReducer
+            userAuth: userReducer
         }
     });
 }

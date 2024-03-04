@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './App.scss';
-import AppRouter from './components/AppRouter/AppRouter';
+import AppRouter from './components/Common/AppRouter/AppRouter';
 import { checkAuth } from './store/slices/userSlice';
 import { useEffect } from 'react';
 
