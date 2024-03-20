@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "../store/store";
 import { selectExpDate } from "../store/slices/userSlice";
 import { isTokenExpired } from "../utils/tokens";
 
@@ -11,13 +10,6 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    const exp = selectExpDate(store.getState());
-
-    if(isTokenExpired(new Date(exp)))
-    {
-        
-    }
-
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     return config;
 }
