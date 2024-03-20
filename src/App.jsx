@@ -3,6 +3,7 @@ import './App.scss';
 import AppRouter from './components/Common/AppRouter/AppRouter';
 import { checkAuth } from './store/slices/userSlice';
 import { useEffect } from 'react';
+import AuthService from './API/AuthService';
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
     
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            dispatch(checkAuth())
+            dispatch(checkAuth());
+            console.log(AuthService.isTokenExpired(0));
         }
     }, [])
 

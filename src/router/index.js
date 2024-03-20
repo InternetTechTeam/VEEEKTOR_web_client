@@ -12,7 +12,7 @@ export const privateRoutes = [
             <HomePage/>
         </PageContent>,
         exact: true
-    },
+    }
 ]
 
 export const publicRoutes = [
@@ -31,5 +31,5 @@ export const publicRoutes = [
                 <SignInForm/>
             </AuthorizationPage>,
         exact: true
-    },
+    }
 ]

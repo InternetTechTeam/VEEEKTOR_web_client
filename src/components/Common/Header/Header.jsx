@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Header.module.scss'
-import { logOut, selectIsUserData, selectUser } from '../../../store/slices/userSlice';
+import { logout, selectIsUserData} from '../../../store/slices/userSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <h1>Id пользователя: {data.user_id}</h1>
-      <button onClick={() => dispatch(logOut())}>
+      <button onClick={() => dispatch(logout())}>
         Выйти
       </button>
     </header>
