@@ -1,3 +1,4 @@
+import axios from "axios";
 import $api from "../http";
 
 class AuthService {
@@ -7,6 +8,10 @@ class AuthService {
 
     static signUp = async (name, surname, patronymic, email, password) => {
         return await $api.post("users/signup", {name, surname, patronymic, email, password, role_id: 1});
+    }
+
+    static refresh = async () => {
+        return await axios.post("/api/auth/refresh");
     }
 }
 

@@ -3,7 +3,7 @@ import userReducer from "./slices/userSlice";
 
 
 
-export const setupStore = () => {
+const setupStore = () => {
     return configureStore({
         reducer: 
         {
@@ -11,3 +11,7 @@ export const setupStore = () => {
         }
     });
 }
+
+const store = setupStore();
+
+export default store;

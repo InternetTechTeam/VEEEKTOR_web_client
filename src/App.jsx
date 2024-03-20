@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 function App() {
 
     const dispatch = useDispatch();
+    
     useEffect(() => {
         if(localStorage.getItem('token')) {
             dispatch(checkAuth())

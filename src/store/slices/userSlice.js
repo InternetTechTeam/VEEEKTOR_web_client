@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import AuthService from "../../API/AuthService";
-import { decodeToken } from "../../utils/tokens";
+import { decodeToken, isTokenExpired } from "../../utils/tokens";
 
 export const CREATE_USER = 'create-user';
 
@@ -28,18 +28,12 @@ export const userSlice = createSlice({
                 ...initialState
             }
         },
-        // checkAuth: state => {
-        //     return {
-        //         ...state,
-        //         isLogin: true
-        //     }
-        // }
     },
     extraReducers(builder) {
         builder
         .addCase(signInUser.fulfilled, (state, action) => {
             const {exp, user_id, role_id} = decodeToken(action.payload.access_token);
-
+            
             localStorage.setItem('token', action.payload.access_token);
             return {
                 ...state,
@@ -58,6 +52,20 @@ export const userSlice = createSlice({
             //     isLogin: true
             // };
         })
+        .addCase(checkAuth.fulfilled, (state, action) => {
+            const {exp, user_id, role_id} = decodeToken(action.payload.access_token);
+
+            localStorage.setItem('token', action.payload.access_token);
+            return {
+                ...state,
+                isLogin: true,
+                exp,
+                userData: {
+                    user_id,
+                    role_id
+                }
+            };
+        });
     }
 });
 
@@ -66,6 +74,8 @@ export const signInUser = createAsyncThunk("user/signIn",
         const {email, password} = userData;
 
         const response = await AuthService.signIn(email, password);
+
+        console.log(response);
 
         return response.data;
     }
@@ -83,11 +93,14 @@ export const signUpUser = createAsyncThunk("user/signUp",
 
 export const checkAuth = createAsyncThunk("user/check_auth", 
     async () => {
-        //code
+        const response = await AuthService.refresh();
+
+        return response.data;
     }
 );
 
 export const selectUser = state => state.userAuth;
+export const selectExpDate = state => state.exp;
 export const selectIsLogin = state => state.userAuth.isLogin;
 export const selectIsUserData = state => state.userAuth.userData;
 

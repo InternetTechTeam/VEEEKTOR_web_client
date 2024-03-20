@@ -6,5 +6,6 @@ export const decodeToken = token => {
 }
 
 export const isTokenExpired = expData => {
-    return true;
+    console.log(new Date(), expData);
+    return new Date() > expData;
 }
