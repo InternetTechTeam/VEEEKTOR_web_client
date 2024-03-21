@@ -2,44 +2,43 @@ import React, { useState } from 'react';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signIn, signUpUser } from '../../../store/slices/userSlice';
+import { useSignUp } from '../../../hooks/useSignUp';
+import { AUTH_STATUS } from '../../../store/slices/authSlice';
+import Preloader from '../Preloader/Preloader';
+import SuccessSignUp from '../SuccessSignUp/SuccessSignUp';
+
 
 const SignUpForm = () => {
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [patronymic, setPatronymic] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {fields, onFieldChange, onSendForm, status} = useSignUp();
+  const [show, setShow] = useState(false);
 
-  const dispatch = useDispatch();
+  const onChange = (e) => {
+    onFieldChange(e.target.name, e.target.value);
+  }
 
-  const onSendForm = (e) => {
-    e.preventDefault();
-    dispatch(signUpUser({
-      name,
-      surname,
-      patronymic,
-      email,
-      password
-    }));
-    setName('');
-    setSurname('');
-    setPatronymic('');
-    setEmail('');
-    setPassword('');
+  if(status === AUTH_STATUS.LOADING) {
+      return <Preloader/>
+  };
+
+  if(status === AUTH_STATUS.SIGN_UP) {
+    
+    return <SuccessSignUp email={fields.email} password={fields.password}/>
   }
 
   return (
 <div className="">
     <h1>Зарегистрироваться</h1>
     <form onSubmit={onSendForm}>
-        <Input name='name' type="text" placeholder='Имя' value={name} onChange={e => setName(e.target.value)}/>
-        <Input name='surname' type="text" placeholder='Фамилия' value={surname} onChange={e => setSurname(e.target.value)}/>
-        <Input name='patronymic' type="text" placeholder='Отчество' value={patronymic} onChange={e => setPatronymic(e.target.value)}/>
-        <Input name='email' type="email" placeholder='Адрес почты'value={email} onChange={e => setEmail(e.target.value)}/>
-        <Input name='pass' type="password" placeholder='Пароль'value={password} onChange={e => setPassword(e.target.value)}/>
+        <Input name='name' type="text" placeholder='Имя' value={fields.name} onChange={onChange}/>
+        <Input name='surname' type="text" placeholder='Фамилия' value={fields.surname} onChange={onChange}/>
+        <Input name='patronymic' type="text" placeholder='Отчество' value={fields.patronymic} onChange={onChange}/>
+        <Input name='email' type="email" placeholder='Адрес почты'value={fields.email} onChange={onChange}/>
+        <Input name='password' type={show ? "text" : "password"} placeholder='Пароль'value={fields.password} onChange={onChange}/>
+        <div className="">
+          <input id='show' type="checkbox" onClick={() => show ? setShow(false): setShow(true)}/>
+          <label htmlFor="show">Показать пароль</label>
+        </div>
         <Button>Зарегистрироваться</Button>
     </form>
     <div style={{display: 'flex'}}>

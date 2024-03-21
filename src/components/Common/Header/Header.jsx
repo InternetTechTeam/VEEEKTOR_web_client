@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Header.module.scss'
-import { logout, selectIsUserData} from '../../../store/slices/userSlice';
+import { logout, selectIsUserData} from '../../../store/slices/authSlice';
 
 const Header = () => {
   const dispatch = useDispatch();

@@ -1,14 +1,16 @@
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {signInUser } from '../../../store/slices/userSlice';
+import {signInUser } from '../../../store/slices/authSlice';
 
 const SignInForm = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const location = useLocation();
+
+  const [email, setEmail] = useState(location.state?.email);
+  const [password, setPassword] = useState(location.state?.password);
 
   const dispatch = useDispatch();
 

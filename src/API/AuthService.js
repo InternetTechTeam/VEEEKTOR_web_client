@@ -6,7 +6,9 @@ class AuthService {
     }
 
     static signUp = async (name, surname, patronymic, email, password) => {
-        return await axios.post("/api/users/signup", {name, surname, patronymic, email, password, role_id: 1});
+        return await axios.post("/api/users/signup", {email, password, name, patronymic, surname, dep_id: 2}, {
+            withCredentials: true
+        });
     }
 
     static refresh = async () => {
@@ -17,8 +19,10 @@ class AuthService {
         return await axios.post("/api/auth/logout");
     }
 
-    static isTokenExpired = (exp) => {  
-        return new Date(exp) < new Date();
+    static isTokenExpired = (exp) => {
+        console.log(new Date(exp));
+        const currentDate = new Date();
+        return exp < currentDate.getTime();
     }
 }
 

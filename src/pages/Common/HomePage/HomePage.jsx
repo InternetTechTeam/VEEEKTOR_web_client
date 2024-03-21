@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux'
 import classes from './HomePage.module.scss'
-import { useState } from 'react'
-import { selectUser } from '../../../store/slices/userSlice';
+
 
 const HomePage = () => {
   return (
