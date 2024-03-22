@@ -41,7 +41,6 @@ export const checkAuth = createAsyncThunk("auth/check_auth",
 export const logout = createAsyncThunk("auth/logout", 
     async () => {
         const response = await AuthService.logout();
-
         return response.data;
     }
 );
