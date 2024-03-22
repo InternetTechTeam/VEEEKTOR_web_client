@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatus, signUpUser } from "../store/slices/authSlice";
+import { selectAuthStatus, signUpUser } from "../store/slices/authSlice";
 
 export const useSignUp = (initialState = null) => {
     const [fields, setFields] = useState(initialState || {
@@ -11,7 +11,7 @@ export const useSignUp = (initialState = null) => {
         password: ''
     });
     const dispatch = useDispatch();
-    const status = useSelector(selectStatus);
+    const status = useSelector(selectAuthStatus);
 
     const onFieldChange = (fieldName, newValue) => {
         setFields((prev) => {
@@ -27,7 +27,6 @@ export const useSignUp = (initialState = null) => {
         console.log(fields);
         dispatch(signUpUser(fields));
       }
-
 
     return {fields, onFieldChange, onSendForm, status};
 }

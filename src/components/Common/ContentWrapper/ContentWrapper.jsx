@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-const PageContent = ({children}) => {
+const ContentWrapper = ({children}) => {
   return (
     <>
     <Header/>
@@ -11,4 +11,4 @@ const PageContent = ({children}) => {
   )
 }
 
-export default PageContent;
+export default ContentWrapper;

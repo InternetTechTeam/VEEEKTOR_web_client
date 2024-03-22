@@ -1,16 +1,15 @@
-import PageContent from "../components/Common/PageContent/PageContent";
+import ContentWrapper from "../components/Common/ContentWrapper/ContentWrapper";
 import SignInForm from "../components/Common/SIgnInForm/SignInForm";
 import SignUpForm from "../components/Common/SignUpForm/SignUpForm";
 import AuthorizationPage from "../pages/Common/AuthorizationPage/AuthorizationPage";
 import HomePage from "../pages/Common/HomePage/HomePage";
-
 export const privateRoutes = [
     {
         path: '/home',
         element:
-        <PageContent>
+        <ContentWrapper>
             <HomePage/>
-        </PageContent>,
+        </ContentWrapper>,
         exact: true
     }
 ]

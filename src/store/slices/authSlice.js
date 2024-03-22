@@ -6,6 +6,7 @@ export const ACCESS_TOKEN_KEY = "token";
 
 export const AUTH_STATUS = {
     LOADING: 'loading',
+    CHECK: 'check',
     SIGN_IN: 'sign_in',
     SIGN_UP: 'sign_up',
     IDLE: 'idle',
@@ -42,6 +43,7 @@ export const authSlice = createSlice({
     },
     extraReducers(builder) {
         builder
+        //sign in
         .addCase(signInUser.pending, (state) => {
             state.status = AUTH_STATUS.LOADING;
         })
@@ -57,6 +59,11 @@ export const authSlice = createSlice({
                 status: AUTH_STATUS.SIGN_IN
             };
         })
+        .addCase(signInUser.rejected, (state, action) => {
+            state.status = AUTH_STATUS.FAILED;
+            state.error = parseInt(action.error.message.split(" ").pop());
+        })
+        //sign up
         .addCase(signUpUser.pending, (state) => {
             state.status = AUTH_STATUS.LOADING;
         })
@@ -66,6 +73,10 @@ export const authSlice = createSlice({
         .addCase(signUpUser.rejected, (state, action) => {
             state.status = AUTH_STATUS.FAILED;
             state.error = parseInt(action.error.message.split(" ").pop());
+        })
+        //check authentication
+        .addCase(checkAuth.pending, (state) => {
+            state.status = AUTH_STATUS.CHECK;
         })
         .addCase(checkAuth.fulfilled, (state, action) => {
             const {exp, userData} = decodeToken(action.payload.access_token);
@@ -81,6 +92,7 @@ export const authSlice = createSlice({
         .addCase(checkAuth.rejected, (state) => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return state;
+        //logout
         })
         .addCase(logout.fulfilled, () => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -137,7 +149,7 @@ export const logout = createAsyncThunk("auth/logout",
 );
 
 export const selectUser = state => state.userAuth;
-export const selectStatus = state => state.userAuth.status; 
+export const selectAuthStatus = state => state.userAuth.status; 
 export const selectExpDate = state => state.userAuth.exp;
 export const selectIsLogin = state => state.userAuth.isLogin;
 export const selectIsUserData = state => state.userAuth.userData;

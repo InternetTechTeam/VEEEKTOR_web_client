@@ -20,7 +20,6 @@ class AuthService {
     }
 
     static isTokenExpired = (exp) => {
-        console.log(new Date(exp));
         const currentDate = new Date();
         return exp < currentDate.getTime();
     }

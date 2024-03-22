@@ -7,12 +7,11 @@ const SuccessSignUp = ({email, password}) => {
     
     const click = () => {
         navigation("/sign_in", {state: {email, password}});
-        console.log("fffff");
     }
 
   return (
     <div>
-        Вы успешно зарегистрировались
+        <h1>Вы успешно зарегистрировались</h1>
         <Button onClick={click}>Войти </Button>
     </div>
   )
