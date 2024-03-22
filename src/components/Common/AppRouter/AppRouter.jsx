@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLogin } from "../../../store/slices/authSlice";
 import { privateRoutes, publicRoutes } from "../../../router";
+import { selectIsLogin } from "../../../store/slices/authentication/selectors";
 
 const AppRouter = () => {
-    const isLogin = useSelector(state => selectIsLogin(state));
+    const isLogin = useSelector(selectIsLogin);
     return (
         isLogin
         ?

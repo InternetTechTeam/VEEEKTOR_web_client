@@ -1,3 +1,4 @@
+import CoursesList from '../../../components/Common/CoursesList/CoursesList';
 import classes from './HomePage.module.scss'
 
 
@@ -9,7 +10,7 @@ const HomePage = () => {
             sidebar
         </div>
         <div className={classes.main}>
-
+            <CoursesList/>
         </div>
     </div>
   )

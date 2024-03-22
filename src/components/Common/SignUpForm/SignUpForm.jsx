@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { Link } from 'react-router-dom';
-import { useSignUp } from '../../../hooks/useSignUp';
-import { AUTH_STATUS } from '../../../store/slices/authSlice';
+import { useAuthentication, useSignUp } from '../../../hooks/useAuthentication';
 import Preloader from '../Preloader/Preloader';
 import SuccessSignUp from '../SuccessSignUp/SuccessSignUp';
+import { AUTH_STATUS } from '../../../store/slices/authentication/constants';
+import { signUpUser } from '../../../store/slices/authentication/thunks';
 
 
 const SignUpForm = () => {
-
-  const {fields, onFieldChange, onSendForm, status} = useSignUp();
+  const {fields, onFieldChange, onSendForm, status} = useAuthentication({
+    name: '',
+    surname: '',
+    patronymic: '',
+    email: '',
+    password: ''
+  }, signUpUser);
   const [show, setShow] = useState(false);
 
   const onChange = (e) => {

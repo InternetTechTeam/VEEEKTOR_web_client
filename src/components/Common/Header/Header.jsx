@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Header.module.scss'
-import { logout, selectIsUserData} from '../../../store/slices/authSlice';
+import { selectIsUserData } from '../../../store/slices/authentication/selectors';
+import { logout } from '../../../store/slices/authentication/thunks';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state => selectIsUserData(state));
+  const data = useSelector(selectIsUserData);
 
   return (
     <header className={classes.header}>

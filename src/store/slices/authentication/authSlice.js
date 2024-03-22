@@ -1,28 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import AuthService from "../../API/AuthService";
-import {decodeToken, inMilliSeconds} from "../../utils/tokens";
-
-export const ACCESS_TOKEN_KEY = "token";
-
-export const AUTH_STATUS = {
-    LOADING: 'loading',
-    CHECK: 'check',
-    SIGN_IN: 'sign_in',
-    SIGN_UP: 'sign_up',
-    IDLE: 'idle',
-    FAILED: 'failed'
-}
-
-const initialState = {
-    userData: {
-        user_id: null,
-        role_id: null
-    },
-    exp: 0,
-    isLogin: false,
-    status: AUTH_STATUS.IDLE,
-    error: null
-}
+import {createSlice } from "@reduxjs/toolkit"
+import {decodeToken} from "../../../utils/tokens";
+import { signInUser, signUpUser, checkAuth, logout } from "./thunks";
+import { ACCESS_TOKEN_KEY, AUTH_STATUS, initialState } from "./constants";
 
 export const authSlice = createSlice({
     name: 'userAuth',
@@ -102,57 +81,6 @@ export const authSlice = createSlice({
         })
     }
 });
-
-export const signInUser = createAsyncThunk("auth/signIn",
-    async userData => {
-        const {email, password} = userData;
-
-        const response = await AuthService.signIn(email, password);
-
-        return response.data;
-    }
-);
-
-export const signUpUser = createAsyncThunk("auth/signUp",
-    async userData => {
-        const {name, surname, patronymic, email, password} = userData;
-
-        const response = await AuthService.signUp(name, surname, patronymic, email, password);
-
-        return response.data;
-    }
-);
-
-export const checkAuth = createAsyncThunk("auth/check_auth",
-    async () => {
-        const {exp} = decodeToken(localStorage.getItem(ACCESS_TOKEN_KEY));
-        if(AuthService.isTokenExpired(inMilliSeconds(exp)))
-        {
-            const response = await AuthService.refresh();
-            return response.data;
-        }
-        else
-        {
-            return {access_token: localStorage.getItem(ACCESS_TOKEN_KEY)};
-        }
-
-
-    }
-);
-
-export const logout = createAsyncThunk("auth/logout", 
-    async () => {
-        const response = await AuthService.logout();
-
-        return response.data;
-    }
-);
-
-export const selectUser = state => state.userAuth;
-export const selectAuthStatus = state => state.userAuth.status; 
-export const selectExpDate = state => state.userAuth.exp;
-export const selectIsLogin = state => state.userAuth.isLogin;
-export const selectIsUserData = state => state.userAuth.userData;
 
 export const {updateTokens} = authSlice.actions;
 

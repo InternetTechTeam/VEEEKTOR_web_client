@@ -1,32 +1,27 @@
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {signInUser } from '../../../store/slices/authSlice';
+import { signInUser } from '../../../store/slices/authentication/thunks';
+import { useAuthentication } from '../../../hooks/useAuthentication';
 
 const SignInForm = () => {
 
   const location = useLocation();
+  const {fields, onFieldChange, onSendForm, status} = useAuthentication({
+    email: location.state?.email || '',
+    password: location.state?.password || ''
+  }, signInUser);
 
-  const [email, setEmail] = useState(location.state?.email);
-  const [password, setPassword] = useState(location.state?.password);
-
-  const dispatch = useDispatch();
-
-  const onSendForm = async (e) => {
-    e.preventDefault();
-    dispatch(signInUser({email, password}))
-    setEmail('');
-    setPassword('');
+  const onChange = (e) => {
+    onFieldChange(e.target.name, e.target.value);
   }
 
   return (
     <div>
         <h1>Войти</h1>
         <form onSubmit={onSendForm}>
-            <Input name='mail' type="email" placeholder='Адрес почты' value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input name='pass' type="password" placeholder='Пароль' value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input name='email' type="email" placeholder='Адрес почты' value={fields.email} onChange={onChange}/>
+            <Input name='password' type="password" placeholder='Пароль' value={fields.password} onChange={onChange}/>
             <Button>Войти</Button>
         </form>
         <div style={{display: 'flex'}}>
