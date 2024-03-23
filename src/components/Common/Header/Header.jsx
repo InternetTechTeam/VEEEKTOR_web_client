@@ -9,7 +9,6 @@ import more from "../../../assets/icons/more.svg"
 
 import { logout } from '../../../store/slices/authentication/thunks';
 import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
-import { Link } from 'react-router-dom';
 import Option from '../../UI/DropdownMenu/Options/Option';
 import OptionButton from '../../UI/DropdownMenu/Options/OptionButton';
 import Divider from '../../UI/DropdownMenu/Options/Divider';
@@ -30,10 +29,10 @@ const Header = () => {
         <img className={classes.userAvatar} src={avatar} alt="avatar"/>
 
         <DropdownMenu options={[
-            <Option>Личный кабинет</Option>,
-            <Option>Оценки</Option>,
-            <Option>Сообщения</Option>,
-            <Option>Настройки</Option>,
+            <Option to="/">Личный кабинет</Option>,
+            <Option to="/">Оценки</Option>,
+            <Option to="/">Сообщения</Option>,
+            <Option to="/">Настройки</Option>,
             <Divider/>,
             <OptionButton onClick={() => dispatch(logout())}>Выйти</OptionButton>
           ]}>
