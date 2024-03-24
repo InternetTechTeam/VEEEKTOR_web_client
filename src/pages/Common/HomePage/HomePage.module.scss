@@ -1,17 +1,17 @@
+@import "../../../styles/variables.scss";
+
 .home {
     width: 100%;
-    height: 200vh;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 3fr;
 }
 
 .main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    background-color: gray;
-    color: red;
+    padding-top: 80px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: $main-color;
 }
 
 .sidebar {
@@ -19,13 +19,5 @@
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    background-color: rebeccapurple;
-    color: red;
-}
-
-.editorArea {
-    height: 100vh;
-    width: 50%;
-    padding: 20px;
-    font-size: 20px;
+    background-color: $thirdy-color;
 }

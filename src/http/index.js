@@ -12,7 +12,6 @@ const $api = axios.create({
     baseURL: API_URL
 });
 
-
 $api.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     const {exp} = decodeToken(localStorage.getItem(ACCESS_TOKEN_KEY));
@@ -21,14 +20,13 @@ $api.interceptors.request.use(async (config) => {
         try {
             const response = await axios.post("/api/auth/refresh");
             console.log("Токены обновлены");
-            // store.dispatch(updateTokens(response.data));
             localStorage.setItem(ACCESS_TOKEN_KEY, response.data.access_token);
             config.headers.Authorization = `Bearer ${localStorage.getItem(ACCESS_TOKEN_KEY)}`;
 
             return config;
         }
-        catch {
-            console.log("refresh Сдох (");
+        catch (error){
+            throw error;
         }
     }
     else
