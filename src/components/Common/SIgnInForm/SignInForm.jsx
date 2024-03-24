@@ -3,6 +3,7 @@ import Button from '../../UI/Button/Button';
 import { Link, useLocation } from 'react-router-dom';
 import { signInUser } from '../../../store/slices/authentication/thunks';
 import { useAuthentication } from '../../../hooks/useAuthentication';
+import Error from '../../UI/Error/Error';
 
 const SignInForm = () => {
 
@@ -20,8 +21,15 @@ const SignInForm = () => {
     <div>
         <h1>Войти</h1>
         <form onSubmit={onSendForm}>
-            <Input name='email' type="email" placeholder='Адрес почты' value={fields.email} onChange={onChange}/>
+            <Input
+            name='email'
+            type="email"
+            placeholder='Адрес почты'
+            value={fields.email}
+            onChange={onChange}
+            />
             <Input name='password' type="password" placeholder='Пароль' value={fields.password} onChange={onChange}/>
+            <Error></Error>
             <Button>Войти</Button>
         </form>
         <div style={{display: 'flex'}}>
