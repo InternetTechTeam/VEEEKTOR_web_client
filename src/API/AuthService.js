@@ -5,8 +5,8 @@ class AuthService {
         return await axios.post("/api/users/signin", {email, password});
     }
 
-    static signUp = async (name, surname, patronymic, email, password) => {
-        return await axios.post("/api/users/signup", {email, password, name, patronymic, surname, dep_id: 2}, {
+    static signUp = async (name, surname, patronymic, email, password, dep_id) => {
+        return await axios.post("/api/users/signup", {email, password, name, patronymic, surname, dep_id}, {
             withCredentials: true
         });
     }
@@ -17,6 +17,10 @@ class AuthService {
 
     static logout = async () =>  {
         return await axios.post("/api/auth/logout");
+    }
+
+    static getAllEnviroments = async () => {
+        return await axios.post("/api/");
     }
 
     static isTokenExpired = (exp) => {

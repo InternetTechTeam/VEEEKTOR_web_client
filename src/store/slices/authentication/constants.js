@@ -8,14 +8,3 @@ export const AUTH_STATUS = {
     IDLE: 'idle',
     FAILED: 'failed'
 }
-
-export const initialState = {
-    userData: {
-        user_id: null,
-        role_id: null
-    },
-    exp: 0,
-    isLogin: false,
-    status: AUTH_STATUS.IDLE,
-    error: null
-}

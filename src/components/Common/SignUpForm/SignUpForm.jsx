@@ -1,52 +1,70 @@
 import React, { useState } from 'react';
-import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { Link } from 'react-router-dom';
-import { useAuthentication, useSignUp } from '../../../hooks/useAuthentication';
 import Preloader from '../Preloader/Preloader';
 import SuccessSignUp from '../SuccessSignUp/SuccessSignUp';
-import { AUTH_STATUS } from '../../../store/slices/authentication/constants';
-import { signUpUser } from '../../../store/slices/authentication/thunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFields } from '../../../store/slices/signUp/selectors/fieldsSelector';
+import { setField } from '../../../store/slices/signUp/signUpSlice';
+import { signUpUser } from '../../../store/slices/signUp/thunks';
+import { selectSignUpStatus } from '../../../store/slices/signUp/selectors/statusSelector';
+import { SIGN_UP_STATUS } from '../../../store/slices/signUp/sliceConfig';
+import FullnameStage from './FullnameStage';
+import PasswordStage from './PasswordStage';
+import EnviromentsStage from './EnviromentsStage';
 
+const MAX_STAGE = 2;
+const MIN_STAGE = 0;
 
 const SignUpForm = () => {
-  const {fields, onFieldChange, onSendForm, status} = useAuthentication({
-    name: '',
-    surname: '',
-    patronymic: '',
-    email: '',
-    password: ''
-  }, signUpUser);
-  const [show, setShow] = useState(false);
 
-  const onChange = (e) => {
-    onFieldChange(e.target.name, e.target.value);
+  const [stage, setStage] = useState(MIN_STAGE);
+
+  const fields = useSelector(selectFields);
+  const status = useSelector(selectSignUpStatus);
+  const dispatch = useDispatch();
+
+const onChange = (e) => {
+    const {name, value} = e.target;
+    dispatch(setField({name, value}));
   }
 
-  if(status === AUTH_STATUS.LOADING) {
+const stages = [
+    <FullnameStage onChange={onChange} fields={fields}/>,
+    <PasswordStage onChange={onChange} fields={fields}/>,
+    <EnviromentsStage onChange={onChange} fields={fields}/>
+ ]
+
+  const onSendForm = (e) => {
+    e.preventDefault();
+    dispatch(signUpUser())
+  }
+
+  if(status === SIGN_UP_STATUS.LOADING) {
       return <Preloader/>
   };
 
-  if(status === AUTH_STATUS.SIGN_UP) {
-    
+  if(status === SIGN_UP_STATUS.SUCCESS) {
     return <SuccessSignUp email={fields.email} password={fields.password}/>
+  }
+
+  const nexStage = () => {
+    if(stage !== MAX_STAGE) setStage(stage + 1);
+  }
+
+  const prevStage = () => {
+    if(stage !== MIN_STAGE) setStage(stage - 1);
   }
 
   return (
 <div className="">
     <h1>Зарегистрироваться</h1>
     <form onSubmit={onSendForm}>
-        <Input name='name' type="text" placeholder='Имя' value={fields.name} onChange={onChange}/>
-        <Input name='surname' type="text" placeholder='Фамилия' value={fields.surname} onChange={onChange}/>
-        <Input name='patronymic' type="text" placeholder='Отчество' value={fields.patronymic} onChange={onChange}/>
-        <Input name='email' type="email" placeholder='Адрес почты'value={fields.email} onChange={onChange}/>
-        <Input name='password' type={show ? "text" : "password"} placeholder='Пароль'value={fields.password} onChange={onChange}/>
-        <div className="">
-          <input id='show' type="checkbox" onClick={() => show ? setShow(false): setShow(true)}/>
-          <label htmlFor="show">Показать пароль</label>
-        </div>
-        <Button>Зарегистрироваться</Button>
+      {stages[stage]}
+      <Button disabled={stage !== MAX_STAGE}>Зарегистрироваться</Button>
     </form>
+    <Button disabled={stage === MIN_STAGE} onClick={prevStage}>Назад</Button>
+    <Button disabled={stage === MAX_STAGE} onClick={nexStage}>Далее</Button>
     <div style={{display: 'flex'}}>
             <p style={{marginRight: '10px'}}>Уже зарегистрированы?</p>
             <Link to={'/'}>Войти</Link>

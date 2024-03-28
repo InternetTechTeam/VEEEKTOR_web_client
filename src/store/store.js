@@ -1,6 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit"
 import coursesReducer from "./slices/courses/coursesSlice";
-import authSlice from "./slices/authentication/authSlice";
+import authReducer from "./slices/authentication/authSlice";
+import signUpReducer from "./slices/signUp/signUpSlice";
 
 
 
@@ -8,8 +9,9 @@ const setupStore = () => {
     return configureStore({
         reducer: 
         {
-            userAuth: authSlice,
-            userCourses: coursesReducer
+            userAuth: authReducer,
+            userCourses: coursesReducer,
+            userSignUp: signUpReducer
         }
     });
 }

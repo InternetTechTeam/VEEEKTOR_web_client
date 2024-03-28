@@ -1,0 +1,1 @@
+export const selestDepOptions = state => state.userSignUp.dep_options;
