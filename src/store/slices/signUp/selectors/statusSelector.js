@@ -1,0 +1,1 @@
+export const selectSignUpStatus = state => state.signUp.status;

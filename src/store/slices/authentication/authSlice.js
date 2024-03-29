@@ -1,10 +1,21 @@
 import {createSlice } from "@reduxjs/toolkit"
 import {decodeToken} from "../../../utils/tokens";
-import { signInUser, signUpUser, checkAuth, logout } from "./thunks";
-import { ACCESS_TOKEN_KEY, AUTH_STATUS, initialState } from "./constants";
+import { signInUser, checkAuth, logout } from "./thunks";
+import { ACCESS_TOKEN_KEY, AUTH_STATUS} from "./constants";
+
+const initialState = {
+    userData: {
+        user_id: null,
+        role_id: null
+    },
+    exp: 0,
+    isLogin: false,
+    status: AUTH_STATUS.IDLE,
+    error: null
+}
 
 export const authSlice = createSlice({
-    name: 'userAuth',
+    name: 'Auth',
     initialState,
     reducers: {
         updateTokens: (state, action) => {
@@ -39,17 +50,6 @@ export const authSlice = createSlice({
             };
         })
         .addCase(signInUser.rejected, (state, action) => {
-            state.status = AUTH_STATUS.FAILED;
-            state.error = parseInt(action.error.message.split(" ").pop());
-        })
-        //sign up
-        .addCase(signUpUser.pending, (state) => {
-            state.status = AUTH_STATUS.LOADING;
-        })
-        .addCase(signUpUser.fulfilled, (state) => {
-            state.status = AUTH_STATUS.SIGN_UP;
-        })
-        .addCase(signUpUser.rejected, (state, action) => {
             state.status = AUTH_STATUS.FAILED;
             state.error = parseInt(action.error.message.split(" ").pop());
         })

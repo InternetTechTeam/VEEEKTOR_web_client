@@ -9,4 +9,8 @@
     font-size: 16px;
     padding: 15px 15px;
     min-width: 200px;
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }

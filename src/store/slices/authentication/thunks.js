@@ -13,16 +13,6 @@ export const signInUser = createAsyncThunk("auth/signIn",
     }
 );
 
-export const signUpUser = createAsyncThunk("auth/signUp",
-    async userData => {
-        const {name, surname, patronymic, email, password} = userData;
-
-        const response = await AuthService.signUp(name, surname, patronymic, email, password);
-
-        return response.data;
-    }
-);
-
 export const checkAuth = createAsyncThunk("auth/check_auth",
     async () => {
         const {exp} = decodeToken(localStorage.getItem(ACCESS_TOKEN_KEY));

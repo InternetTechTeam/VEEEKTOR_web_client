@@ -1,5 +1,5 @@
-export const selectUser = state => state.userAuth;
-export const selectAuthStatus = state => state.userAuth.status; 
-export const selectExpDate = state => state.userAuth.exp;
-export const selectIsLogin = state => state.userAuth.isLogin;
-export const selectIsUserData = state => state.userAuth.userData;
+export const selectUser = state => state.auth;
+export const selectAuthStatus = state => state.auth.status; 
+export const selectExpDate = state => state.auth.exp;
+export const selectIsLogin = state => state.auth.isLogin;
+export const selectIsUserData = state => state.auth.userData;
