@@ -10,10 +10,6 @@ const HomePage = () => {
   return (
 
     <div className={classes.home}>
-         <div className={classes.sidebar}>
-            sidebar
-        </div>
-        <div className={classes.main}>
           {coursesStatus === COURSES_STATUS.LOADING
           ?
           <Preloader/>
@@ -24,7 +20,6 @@ const HomePage = () => {
           </>
 
           }
-        </div>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Header.module.scss';
-import { selectIsUserData } from '../../../store/slices/authentication/selectors';
 
 import logo from "../../../assets/icons/logo.svg";
 import avatar from "../../../assets/icons/avatar.svg";
@@ -12,11 +11,11 @@ import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
 import Option from '../../UI/DropdownMenu/Options/Option';
 import OptionButton from '../../UI/DropdownMenu/Options/OptionButton';
 import Divider from '../../UI/DropdownMenu/Options/Divider';
+import { selectUserData } from '../../../store/slices/user/selectors/userDataSelector';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const data = useSelector(selectIsUserData);
-
+  const userData = useSelector(selectUserData);
   return (
     <header className={classes.header}>
       <div className={classes.logoWrapper}>
@@ -25,11 +24,11 @@ const Header = () => {
       </div>
       <div className={classes.userWrapper}>
         <img className={classes.userNotifications} src={notifications} alt="notifications"/>
-        <p className={classes.userName}>id {data.user_id}</p>
+        <p className={classes.userName}>{userData.name} {userData.surname}</p>
         <img className={classes.userAvatar} src={avatar} alt="avatar"/>
 
         <DropdownMenu options={[
-            <Option to="/">Личный кабинет</Option>,
+            <Option to="/profile">Личный кабинет</Option>,
             <Option to="/">Оценки</Option>,
             <Option to="/">Сообщения</Option>,
             <Option to="/">Настройки</Option>,
