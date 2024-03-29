@@ -3,12 +3,21 @@ import SignInForm from "../components/Common/SIgnInForm/SignInForm";
 import SignUpForm from "../components/Common/SignUpForm/SignUpForm";
 import AuthorizationPage from "../pages/Common/AuthorizationPage/AuthorizationPage";
 import HomePage from "../pages/Common/HomePage/HomePage";
+import PersonalAreaPage from "../pages/Common/PersonalAreaPage/PersonalAreaPage";
 export const privateRoutes = [
     {
         path: '/home',
         element:
         <ContentWrapper>
             <HomePage/>
+        </ContentWrapper>,
+        exact: true
+    },
+    {
+        path: '/profile',
+        element:
+        <ContentWrapper>
+            <PersonalAreaPage/>
         </ContentWrapper>,
         exact: true
     }

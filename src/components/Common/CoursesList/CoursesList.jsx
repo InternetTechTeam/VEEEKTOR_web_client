@@ -8,12 +8,18 @@ const CoursesList = () => {
     const courses = useSelector(selectCourses);
   return (  
     <div className={classes.listWrapper}>
+      {courses?.length !== 0 
+      ?
       <div className={classes.list}>
-          {courses?.map((course) => {
-            return <CourseItem key={course.id} data={course}/>
-          })
-          }
+        {courses?.map((course) => {
+          return <CourseItem key={course.id} data={course}/>
+        })
+        }
       </div>
+      :
+      <h2>У вас пока что нет курсов</h2>
+    }
+
     </div>
   )
 }

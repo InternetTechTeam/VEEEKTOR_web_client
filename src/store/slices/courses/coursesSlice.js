@@ -15,7 +15,7 @@ export const coursesSlice = createSlice({
         })
         .addCase(getAllCourses.fulfilled, (state, action) => {
             state.status = COURSES_STATUS.SUCCEEDED;
-            state.courses = action.payload;
+            state.courses = action.payload || [];
         })
         .addCase(getAllCourses.rejected, (state) => {
             state.status = COURSES_STATUS.FAILED;
