@@ -1,1 +1,1 @@
-export const selestDepOptions = state => state.userSignUp.dep_options;
+export const selestDepOptions = state => state.signUp.dep_options;

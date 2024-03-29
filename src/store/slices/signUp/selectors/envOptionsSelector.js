@@ -1,1 +1,1 @@
-export const selectEnvOptions = state => state.userSignUp.env_options;
+export const selectEnvOptions = state => state.signUp.env_options;

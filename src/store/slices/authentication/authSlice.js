@@ -15,7 +15,7 @@ const initialState = {
 }
 
 export const authSlice = createSlice({
-    name: 'userAuth',
+    name: 'Auth',
     initialState,
     reducers: {
         updateTokens: (state, action) => {

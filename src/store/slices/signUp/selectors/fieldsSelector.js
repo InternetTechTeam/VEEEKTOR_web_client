@@ -1,1 +1,1 @@
-export const selectFields = state => state.userSignUp.fields;
+export const selectFields = state => state.signUp.fields;

@@ -20,7 +20,7 @@ const initialState = {
 }
 
 const signUpSlice = createSlice({
-    name: "userSignUp",
+    name: "SignUp",
     initialState,
     reducers: {
         setField: (state, action) => {

@@ -9,9 +9,9 @@ const setupStore = () => {
     return configureStore({
         reducer: 
         {
-            userAuth: authReducer,
-            userCourses: coursesReducer,
-            userSignUp: signUpReducer
+            auth: authReducer,
+            signUp: signUpReducer,
+            courses: coursesReducer,
         }
     });
 }
