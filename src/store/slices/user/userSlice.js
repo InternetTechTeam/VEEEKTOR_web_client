@@ -31,7 +31,9 @@ export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-
+        clearData: () => {
+            return initialState;
+        }
     },
     extraReducers(builder) {
         builder
@@ -45,5 +47,6 @@ export const userSlice = createSlice({
     }
 });
 
+export const {clearData} =  userSlice.actions;
 
 export default userSlice.reducer;

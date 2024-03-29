@@ -38,12 +38,12 @@ export const authSlice = createSlice({
             state.status = AUTH_STATUS.SIGN_IN;
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
-        .addCase(checkAuth.rejected, (state) => {
+        .addCase(checkAuth.rejected, () => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return initialState;
         //logout
         })
-        .addCase(logout.fulfilled, (state) => {
+        .addCase(logout.fulfilled, () => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return initialState;
         })

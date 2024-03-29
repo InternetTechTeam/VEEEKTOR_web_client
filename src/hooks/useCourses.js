@@ -17,6 +17,8 @@ export const useCourses = () => {
         else {
             dispatch(removeCourses());
         }
+
+        return () => dispatch(removeCourses());
     }, 
     [isLogin, dispatch]);
 
