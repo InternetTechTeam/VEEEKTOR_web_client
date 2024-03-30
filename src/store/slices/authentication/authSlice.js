@@ -7,7 +7,8 @@ const initialState = {
     status: AUTH_STATUS.IDLE,
     fields: {
         password: undefined,
-        email: undefined
+        email: undefined,
+        errors: {}
     },
     error: undefined
 }
@@ -16,6 +17,9 @@ export const authSlice = createSlice({
     name: 'Auth',
     initialState,
     reducers: {
+        setErrors: (state, action) => {
+            state.fields.errors = action.payload;
+        },
         setField: (state, action) => {
             const {name, value} = action.payload;
             state.fields[name] = value;
@@ -62,6 +66,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const {setField,setInitialFields, clearFields} = authSlice.actions;
+export const {setField,setInitialFields, clearFields, setErrors} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,17 +1,21 @@
 const validationRules = {
-    name: [required, minLength(2), maxLength(30)],
-    surname: [required, minLength(2), maxLength(30)],
-    patronymic: [required, minLength(2), maxLength(30)],
+    name: [required, nameFormat, minLength(2), maxLength(30)],
+    surname: [required, nameFormat, minLength(2), maxLength(30)],
+    patronymic: [required, nameFormat, minLength(2), maxLength(30)],
     email: [required, emailFormat],
     password: [required, onlyEnglishLetters , minLength(8), maxLength(50)],
     dep_id: [required],
     env_id: [required]
-
 }
 
 function emailFormat(value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value) ? undefined : 'Введите корректный email адрес';
+}
+
+function nameFormat(value) {
+    const nameRegex = /^[a-zA-Zа-яА-Я]+$/;
+    return nameRegex.test(value) ? undefined : "Введите корректное имя"
 }
 
 function required(value) {
@@ -22,7 +26,7 @@ function onlyEnglishLetters(value) {
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
   
   if (!passwordRegex.test(value)) {
-    return 'В пароле могу присутсвтвовать только английские буквы';
+    return 'В пароле могут присутствовать только английские буквы';
   }
   
   return undefined; 

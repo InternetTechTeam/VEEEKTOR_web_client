@@ -5,15 +5,16 @@ import Error from '../../UI/Error/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthFields } from '../../../store/slices/authentication/selectors/authFieldsSelector';
 import { selectAuthStatus } from '../../../store/slices/authentication/selectors/authStatusSelector';
-import { setField, setInitialFields } from '../../../store/slices/authentication/authSlice';
+import { setErrors, setField, setInitialFields } from '../../../store/slices/authentication/authSlice';
 import { signInUser } from '../../../store/slices/authentication/thunks';
 import { useEffect } from 'react';
+import { validate } from '../../../utils/validation';
 
 const SignInForm = () => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const fields = useSelector(selectAuthFields);
+  const {errors, ...fields} = useSelector(selectAuthFields);
   const status = useSelector(selectAuthStatus);
 
   useEffect(() => {
@@ -28,22 +29,31 @@ const SignInForm = () => {
 
   const onSendForm = (e) => {
     e.preventDefault();
-    dispatch(signInUser());
+    const {email, password} = fields;
+    const errors = validate({email, password});
+    dispatch(setErrors(errors));
+
+    if(Object.keys(errors).length === 0) {
+        dispatch(signInUser());
+    }
   }
 
   return (
     <div>
         <h1>Войти</h1>
         <form onSubmit={onSendForm}>
-            <Input
-            name='email'
-            type="email"
-            placeholder='Адрес почты'
-            value={fields.email}
-            onChange={onChange}
-            />
-            <Input name='password' type="password" placeholder='Пароль' value={fields.password} onChange={onChange}/>
-            <Error></Error>
+            <Error message={errors.email}>
+              <Input
+              name='email'
+              type="email"
+              placeholder='Адрес почты'
+              value={fields.email}
+              onChange={onChange}
+              />
+            </Error>
+            <Error message={errors.password}>
+              <Input name='password' type="password" placeholder='Пароль' value={fields.password} onChange={onChange}/>
+            </Error>
             <Button>Войти</Button>
         </form>
         <div style={{display: 'flex'}}>
