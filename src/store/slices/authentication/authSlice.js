@@ -1,27 +1,45 @@
 import {createSlice } from "@reduxjs/toolkit"
-import {decodeToken} from "../../../utils/tokens";
 import { signInUser, checkAuth, logout } from "./thunks";
-import { ACCESS_TOKEN_KEY, AUTH_STATUS} from "./constants";
+import { ACCESS_TOKEN_KEY, AUTH_STATUS} from "./config";
 
 const initialState = {
     isLogin: false,
     status: AUTH_STATUS.IDLE,
-    error: null
+    fields: {
+        password: undefined,
+        email: undefined,
+        errors: {}
+    },
+    error: undefined
 }
 
 export const authSlice = createSlice({
     name: 'Auth',
     initialState,
     reducers: {
+        setErrors: (state, action) => {
+            state.fields.errors = action.payload;
+        },
+        setField: (state, action) => {
+            const {name, value} = action.payload;
+            state.fields[name] = value;
+        },
+        setInitialFields: (state, action) => {
+            const {email , password} = action.payload;
+            state.fields.email = email;
+            state.fields.password = password;
+        },
+        clearFields: (state) => {
+            state = initialState;
+        }
     },
     extraReducers(builder) {
         builder
-        //sign in
         .addCase(signInUser.pending, (state) => {
             state.status = AUTH_STATUS.LOADING;
         })
         .addCase(signInUser.fulfilled, (state, action) => {
-            state.status = AUTH_STATUS.SIGN_IN
+            state.status = AUTH_STATUS.SUCCESS;
             state.isLogin = true;
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
@@ -29,19 +47,17 @@ export const authSlice = createSlice({
             state.status = AUTH_STATUS.FAILED;
             state.error = parseInt(action.error.message.split(" ").pop());
         })
-        //check authentication
         .addCase(checkAuth.pending, (state) => {
             state.status = AUTH_STATUS.CHECK;
         })
         .addCase(checkAuth.fulfilled, (state, action) => {
             state.isLogin = true;
-            state.status = AUTH_STATUS.SIGN_IN;
+            state.status = AUTH_STATUS.SUCCESS;
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
         .addCase(checkAuth.rejected, () => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return initialState;
-        //logout
         })
         .addCase(logout.fulfilled, () => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -50,6 +66,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const {updateTokens} = authSlice.actions;
+export const {setField,setInitialFields, clearFields, setErrors} = authSlice.actions;
 
 export default authSlice.reducer;

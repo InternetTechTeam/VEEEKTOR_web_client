@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { decodeToken, inMilliSeconds } from "../../../utils/tokens";
-import { ACCESS_TOKEN_KEY } from "./constants";
+import { ACCESS_TOKEN_KEY } from "./config";
 import AuthService from "../../../API/AuthService";
+import { selectAuthFields } from "./selectors/authFieldsSelector";
 
 export const signInUser = createAsyncThunk("auth/signIn",
-    async userData => {
-        const {email, password} = userData;
+    async (_ , thunkAPI) => {
+        const {email, password} = selectAuthFields(thunkAPI.getState());
 
         const response = await AuthService.signIn(email, password);
 

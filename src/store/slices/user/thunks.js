@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import $api from "../../../http";
 import EducationalEnvService from "../../../API/EducationalEnvService";
+import { getRoleById } from "../../../utils/roles";
 
 
 export const getUserInfo = createAsyncThunk("user/data",
@@ -11,8 +12,15 @@ export const getUserInfo = createAsyncThunk("user/data",
 
             const envRes = await EducationalEnvService.getEnviromentById(depRes.data.env_id);
 
+            const {role_id, dep_id, ...data} = userRes.data;
+
             return {
-                ...userRes.data,
+                ...data,
+                role:
+                {
+                    id: role_id,
+                    name: getRoleById(role_id)
+                },
                 department:
                 {
                     ...depRes.data
