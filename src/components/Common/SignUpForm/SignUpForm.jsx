@@ -5,13 +5,14 @@ import Preloader from '../Preloader/Preloader';
 import SuccessSignUp from '../SuccessSignUp/SuccessSignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFields } from '../../../store/slices/signUp/selectors/fieldsSelector';
-import { setField } from '../../../store/slices/signUp/signUpSlice';
+import { setErrors, setField, validateFields } from '../../../store/slices/signUp/signUpSlice';
 import { signUpUser } from '../../../store/slices/signUp/thunks';
 import { selectSignUpStatus } from '../../../store/slices/signUp/selectors/statusSelector';
 import { SIGN_UP_STATUS } from '../../../store/slices/signUp/sliceConfig';
 import FullnameStage from './FullnameStage';
 import PasswordStage from './PasswordStage';
 import EnviromentsStage from './EnviromentsStage';
+import { validate } from '../../../utils/validation';
 
 const MAX_STAGE = 2;
 const MIN_STAGE = 0;
@@ -20,7 +21,7 @@ const SignUpForm = () => {
 
   const [stage, setStage] = useState(MIN_STAGE);
 
-  const fields = useSelector(selectFields);
+  const {errors, ...fields} = useSelector(selectFields);
   const status = useSelector(selectSignUpStatus);
   const dispatch = useDispatch();
 
@@ -30,14 +31,32 @@ const onChange = (e) => {
   }
 
 const stages = [
-    <FullnameStage onChange={onChange} fields={fields}/>,
-    <PasswordStage onChange={onChange} fields={fields}/>,
-    <EnviromentsStage onChange={onChange} fields={fields}/>
+    <FullnameStage onChange={onChange} fields={fields} errors={errors}/>,
+    <PasswordStage onChange={onChange} fields={fields} errors={errors}/>,
+    <EnviromentsStage onChange={onChange} fields={fields} errors={errors}/>
  ]
 
   const onSendForm = (e) => {
     e.preventDefault();
-    dispatch(signUpUser())
+    if(validateStage()) {
+      dispatch(signUpUser());
+    }
+  }
+
+  const validateStage = () => {
+    const {name, surname, patronymic, email, password, dep_id, env_id} = fields;
+    let errors = {}
+    switch(stage) {
+      case 0: errors = validate({name, surname, patronymic});
+      break;
+      case 1: errors = validate({email, password});
+      break;
+      case 2: errors = validate({dep_id, env_id});
+      break;
+    }
+    dispatch(setErrors(errors));
+
+    return Object.keys(errors).length === 0;
   }
 
   if(status === SIGN_UP_STATUS.LOADING) {
@@ -49,7 +68,9 @@ const stages = [
   }
 
   const nexStage = () => {
-    if(stage !== MAX_STAGE) setStage(stage + 1);
+    if(stage !== MAX_STAGE && validateStage()) {
+          setStage(stage + 1);
+    };
   }
 
   const prevStage = () => {

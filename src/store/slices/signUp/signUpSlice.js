@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SIGN_UP_STATUS } from "./sliceConfig";
 import { getDepartments, getEnviroments, signUpUser } from "./thunks";
+import { validate } from "../../../utils/validation";
 
 const initialState = {
     fields:
@@ -11,7 +12,8 @@ const initialState = {
         email: '',
         password: '',
         dep_id: '',
-        env_id: ''
+        env_id: '',
+        errors: {}
     },
     env_options: [],
     dep_options: [],
@@ -23,6 +25,9 @@ const signUpSlice = createSlice({
     name: "SignUp",
     initialState,
     reducers: {
+        setErrors: (state, action) => {
+            state.fields.errors = action.payload;
+        },
         setField: (state, action) => {
             const {name, value} = action.payload;
             state.fields[name] = value;
@@ -56,4 +61,4 @@ const signUpSlice = createSlice({
 
 export default signUpSlice.reducer;
 
-export const {setField, clearFields} = signUpSlice.actions;
+export const {setField, clearFields, setErrors} = signUpSlice.actions;

@@ -1,0 +1,1 @@
+export const selectFieldsErrors = state => state.signUp.fields.errors;
