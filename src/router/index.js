@@ -2,6 +2,7 @@ import ContentWrapper from "../components/Common/ContentWrapper/ContentWrapper";
 import SignInForm from "../components/Common/SIgnInForm/SignInForm";
 import SignUpForm from "../components/Common/SignUpForm/SignUpForm";
 import AuthorizationPage from "../pages/Common/AuthorizationPage/AuthorizationPage";
+import CoursePage from "../pages/Common/CoursePage/CoursePage";
 import HomePage from "../pages/Common/HomePage/HomePage";
 import PersonalAreaPage from "../pages/Common/PersonalAreaPage/PersonalAreaPage";
 export const privateRoutes = [
@@ -18,6 +19,14 @@ export const privateRoutes = [
         element:
         <ContentWrapper>
             <PersonalAreaPage/>
+        </ContentWrapper>,
+        exact: true
+    },
+    {
+        path: '/courses/:id',
+        element: 
+        <ContentWrapper>
+            <CoursePage/>
         </ContentWrapper>,
         exact: true
     }

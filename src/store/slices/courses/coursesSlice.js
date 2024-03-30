@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getAllCourses } from "./thunks";
-import { COURSES_STATUS, initialState } from "./constants";
+import { STATUS } from "../config";
+
+const initialState = {
+    courses: [],
+    currentCourse: undefined,
+    status: STATUS.IDLE,
+    error: null
+}
 
 export const coursesSlice = createSlice({
     name: "userCourses",
@@ -11,14 +18,14 @@ export const coursesSlice = createSlice({
     extraReducers(builder) {
         builder
         .addCase(getAllCourses.pending, (state) => {
-            state.status = COURSES_STATUS.LOADING;
+            state.status = STATUS.LOADING;
         })
         .addCase(getAllCourses.fulfilled, (state, action) => {
-            state.status = COURSES_STATUS.SUCCEEDED;
+            state.status = STATUS.SUCCEEDED;
             state.courses = action.payload || [];
         })
         .addCase(getAllCourses.rejected, (state) => {
-            state.status = COURSES_STATUS.FAILED;
+            state.status = STATUS.FAILED;
         })
     }
 });
