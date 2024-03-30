@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import CourseItem from '../CourseItem/CourseItem';
-import { selectCourses } from '../../../store/slices/courses/selectors';
+import { selectCourses } from '../../../store/slices/courses/selectors/coursesSelector';
 import classes from "./CoursesList.module.scss";
 
 const CoursesList = () => {

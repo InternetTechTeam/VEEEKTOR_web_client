@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectIsLogin } from "../store/slices/authentication/selectors";
+import { selectIsLogin } from "../store/slices/authentication/selectors/isLoginSelector";
 import { getAllCourses } from "../store/slices/courses/thunks";
 import { removeCourses } from "../store/slices/courses/coursesSlice";
-import { selectCoursesStatus } from "../store/slices/courses/selectors";
+import { selectCoursesStatus } from "../store/slices/courses/selectors/coursesStatusSelector";
 
 export const useCourses = () => {
     const isLogin = useSelector(selectIsLogin);

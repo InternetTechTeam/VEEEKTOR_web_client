@@ -3,7 +3,7 @@ import axios from "axios";
 import AuthService from "../API/AuthService";
 import { decodeToken, inMilliSeconds } from "../utils/tokens";
 // import { updateTokens } from "../store/slices/authentication/authSlice";
-import { ACCESS_TOKEN_KEY } from "../store/slices/authentication/constants";
+import { ACCESS_TOKEN_KEY } from "../store/slices/authentication/config";
 
 const API_URL = "/api/";
 

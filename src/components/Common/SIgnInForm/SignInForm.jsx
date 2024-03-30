@@ -1,20 +1,34 @@
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { Link, useLocation } from 'react-router-dom';
-import { signInUser } from '../../../store/slices/authentication/thunks';
-import { useAuthentication } from '../../../hooks/useAuthentication';
 import Error from '../../UI/Error/Error';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthFields } from '../../../store/slices/authentication/selectors/authFieldsSelector';
+import { selectAuthStatus } from '../../../store/slices/authentication/selectors/authStatusSelector';
+import { setField, setInitialFields } from '../../../store/slices/authentication/authSlice';
+import { signInUser } from '../../../store/slices/authentication/thunks';
+import { useEffect } from 'react';
 
 const SignInForm = () => {
 
   const location = useLocation();
-  const {fields, onFieldChange, onSendForm, status} = useAuthentication({
-    email: location.state?.email || '',
-    password: location.state?.password || ''
-  }, signInUser);
+  const dispatch = useDispatch();
+  const fields = useSelector(selectAuthFields);
+  const status = useSelector(selectAuthStatus);
+
+  useEffect(() => {
+    const signInData = location.state || {email: "", password: ""};
+    dispatch(setInitialFields(signInData));
+  }, [])
 
   const onChange = (e) => {
-    onFieldChange(e.target.name, e.target.value);
+    const {name, value} = e.target;
+    dispatch(setField({name, value}));
+  }
+
+  const onSendForm = (e) => {
+    e.preventDefault();
+    dispatch(signInUser());
   }
 
   return (

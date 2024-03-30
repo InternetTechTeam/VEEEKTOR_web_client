@@ -23,7 +23,7 @@ const PersonalAreaPage = () => {
             </div>
             <div className="">
                 <h2 className={classes.title}>Статус</h2>
-                <h3>{userData.role_id}</h3>
+                <h3>{userData.role.name}</h3>
             </div>
         </div>
     </div>

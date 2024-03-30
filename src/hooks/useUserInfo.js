@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserStatus } from "../store/slices/user/selectors/userStatusSelector";
 import { useEffect } from "react";
 import { getUserInfo } from "../store/slices/user/thunks";
-import { selectIsLogin } from "../store/slices/authentication/selectors";
+import { selectIsLogin } from "../store/slices/authentication/selectors/isLoginSelector";
 import { clearData } from "../store/slices/user/userSlice";
 
 export const useUserInfo = () => {

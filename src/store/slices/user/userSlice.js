@@ -11,6 +11,10 @@ const initialState = {
         surname: "",
         role_id: 0,
         dep_id: 0,
+        role: {
+            name: "",
+            role_id: 0
+        },
         department:
         {
             id: 0,
