@@ -1,0 +1,1 @@
+export const selectCurrentCourse = state => state.courses.currentCourse;

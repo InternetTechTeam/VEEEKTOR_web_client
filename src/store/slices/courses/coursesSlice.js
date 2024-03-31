@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getAllCourses } from "./thunks";
+import { getAllCourses, getCourseById } from "./thunks";
 import { STATUS } from "../config";
 
 const initialState = {
@@ -26,6 +26,13 @@ export const coursesSlice = createSlice({
         })
         .addCase(getAllCourses.rejected, (state) => {
             state.status = STATUS.FAILED;
+        })
+        .addCase(getCourseById.pending, (state) => {
+            state.status = STATUS.LOADING;
+        })
+        .addCase(getCourseById.fulfilled, (state, action) => {
+            state.status = STATUS.SUCCEEDED;
+            state.currentCourse = action.payload;
         })
     }
 });
