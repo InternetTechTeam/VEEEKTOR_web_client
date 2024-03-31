@@ -1,7 +1,7 @@
 import CoursesList from '../../../components/Common/CoursesList/CoursesList';
-import Preloader from '../../../components/Common/Preloader/Preloader';
+import Loading from '../../../components/UI/Loading/Loading';
 import { useCourses } from '../../../hooks/useCourses';
-import { COURSES_STATUS } from '../../../store/slices/courses/constants';
+import { STATUS } from '../../../store/slices/config';
 import classes from './HomePage.module.scss'
 
 
@@ -10,16 +10,10 @@ const HomePage = () => {
   return (
 
     <div className={classes.home}>
-          {coursesStatus === COURSES_STATUS.LOADING
-          ?
-          <Preloader/>
-          :
-          <>
+        <Loading isLoading={coursesStatus === STATUS.LOADING}>
             <h1 style={{textAlign:'center', marginBottom: '30px'}}>Мои курсы</h1>
             <CoursesList/>
-          </>
-
-          }
+        </Loading>
     </div>
   )
 }

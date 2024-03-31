@@ -22,7 +22,6 @@ const Header = () => {
         <img className={classes.userNotifications} src={notifications} alt="notifications"/>
         <p className={classes.userName}>{userData.name} {userData.surname}</p>
         <img className={classes.userAvatar} src={avatar} alt="avatar"/>
-
         <HeaderMenu>
           <img className={classes.more} src={more} alt="more"/>
         </HeaderMenu>

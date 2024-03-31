@@ -1,0 +1,29 @@
+.md {
+    & hr {
+        margin-bottom: 10px;
+    }
+
+    & p {
+        white-space: 'pre-wrap';
+        margin-bottom: 10px;
+    }
+
+    & h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 20px;
+    }
+
+    & img {
+        width: 80%;
+        object-fit: fill;
+    }
+
+    & blockquote {
+        white-space: 'pre-wrap';
+        margin-left: 20px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-left: 3px white solid;
+        background-color: #56555548;
+    }
+}
