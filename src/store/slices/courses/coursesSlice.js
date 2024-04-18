@@ -26,7 +26,7 @@ export const coursesSlice = createSlice({
         })
         .addCase(getAllCourses.rejected, (state) => {
             state.status = STATUS.FAILED;
-        })
+        })  
         .addCase(getCourseById.pending, (state) => {
             state.status = STATUS.LOADING;
         })

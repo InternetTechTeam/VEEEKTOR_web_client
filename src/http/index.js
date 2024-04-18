@@ -21,7 +21,7 @@ $api.interceptors.request.use(async (config) => {
             const response = await axios.post("/api/auth/refresh");
             console.log("Токены обновлены");
             localStorage.setItem(ACCESS_TOKEN_KEY, response.data.access_token);
-            config.headers.Authorization = `Bearer ${localStorage.getItem(ACCESS_TOKEN_KEY)}`;
+            config.headers.Authorization = `Bearer ${response.data.access_token}`;
 
             return config;
         }

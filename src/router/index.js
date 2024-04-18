@@ -32,6 +32,17 @@ export const privateRoutes = [
     }
 ]
 
+export const teacherRoutes = [
+    {
+        path: '/teacher_home',
+        element:
+        <ContentWrapper>
+            <HomePage/>
+        </ContentWrapper>,
+        exact: true
+    },
+]
+
 export const publicRoutes = [
     {
         path: '/sign_up',

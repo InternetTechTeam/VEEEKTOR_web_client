@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams} from 'react-router-dom';
 import { selectCurrentCourse } from '../../../store/slices/courses/selectors/currentCourseSelector';
@@ -17,14 +17,14 @@ const CoursePage = () => {
   const status = useSelector(selectCoursesStatus);
   const course = useSelector(selectCurrentCourse);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getCourseById(id));
   }, [dispatch, id])
 
   return (
     <div className={classes.page}>
           <Loading isLoading={status === STATUS.LOADING}>
-            <CourseMdContent content={exampleMd}/>
+            <CourseMdContent content={course?.markdown}/>
           </Loading>
     </div>
 

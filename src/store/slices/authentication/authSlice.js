@@ -56,6 +56,7 @@ export const authSlice = createSlice({
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
         .addCase(checkAuth.rejected, () => {
+            console.log("бля((");
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return initialState;
         })
