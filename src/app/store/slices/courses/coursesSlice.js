@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const coursesSlice = createSlice({
-    name: "userCourses",
+    name: "сourses",
     initialState,
     reducers: {
         removeCourses: () => initialState,

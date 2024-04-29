@@ -1,4 +1,4 @@
-import CoursesList from 'widgets/CoursesList/ui/CoursesList';
+import {CoursesList} from 'widgets/CoursesList';
 import Loading from 'shared/ui/Loading/Loading';
 import { useCourses } from 'features/courses/lib/useCourses';
 import { STATUS } from 'app/store/slices/config';

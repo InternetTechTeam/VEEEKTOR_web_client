@@ -27,6 +27,7 @@ const initialState = {
             name: ""
         }
     },
+    isInit: false,
     status: STATUS.IDLE,
     error: null
 }
@@ -37,6 +38,9 @@ export const userSlice = createSlice({
     reducers: {
         clearData: () => {
             return initialState;
+        },
+        initUser: (state) => {
+            state.isInit = true;
         }
     },
     extraReducers(builder) {
@@ -46,11 +50,12 @@ export const userSlice = createSlice({
         })
         .addCase(getUserInfo.fulfilled, (state, action) => {
             state.data = action.payload;
+            state.isInit = true;
             state.status = STATUS.SUCCEEDED;
         })
     }
 });
 
-export const {clearData} =  userSlice.actions;
+export const {clearData, initUser} =  userSlice.actions;
 
 export default userSlice.reducer;

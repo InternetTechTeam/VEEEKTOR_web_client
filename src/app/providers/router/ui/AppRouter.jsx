@@ -1,25 +1,41 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { privateRoutes, publicRoutes } from "../lib/routes";
-import { selectIsLogin } from "../../../../app/store/slices/authentication/selectors/isLoginSelector";
+import { selectIsLogin } from "app/store/slices/authentication/selectors/isLoginSelector";
+import ProtectedRoute from "./PrivateRoute";
+import { selectUserRole } from "app/store/slices/user/selectors/userRoleSelector";
+import { isAdmin, isStudent, isTeacher } from "../lib/checkRole";
+import { AppRoutes, routeConfig, routesPath } from "shared/config/routeConfig";
 
 const AppRouter = () => {
     const isLogin = useSelector(selectIsLogin);
+    const { name } = useSelector(selectUserRole);
+
+    let defaultPath = "";
+
+    if(isAdmin(name)) {
+      defaultPath = routesPath[AppRoutes.TEACHER_HOME];
+    }
+    else if(isStudent(name)) {
+      defaultPath = routesPath[AppRoutes.HOME];
+    }
+    else if(isTeacher(name)) {
+      defaultPath = routesPath[AppRoutes.TEACHER_HOME]
+    }
     return (
-        isLogin
-        ?
         <Routes>
-            {privateRoutes.map(route =>
-                <Route path={route.path} exact={route.exact} element={route.element} key={route.path}/>
-            )}
-            <Route path='*' element={<Navigate to="/home" replace/>}/>
-        </Routes>
-        :
-        <Routes>
-            {publicRoutes.map(route =>
-                <Route path={route.path} exact={route.exact} element={route.element} key={route.path}/>
-            )}
-            <Route path='*' element={<Navigate to="/sign_in" replace/>}/>
+            {Object.values(routeConfig).map(({path, element, access}) => (
+            <Route key={path} path={path} element={
+                <ProtectedRoute access={access} redirectPath={'/'}>
+                  {element}
+                </ProtectedRoute>
+            }/>
+          ))}
+          { isLogin
+            ?
+            <Route path="*" element={<Navigate to={defaultPath}/>}/>
+            :
+            <Route path="*" element={<Navigate to={routesPath[AppRoutes.SIGN_IN]}/>}/>
+          }
         </Routes>
     )
 }

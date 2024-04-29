@@ -22,7 +22,7 @@ const initialState = {
 }
 
 const signUpSlice = createSlice({
-    name: "SignUp",
+    name: "signUp",
     initialState,
     reducers: {
         setErrors: (state, action) => {

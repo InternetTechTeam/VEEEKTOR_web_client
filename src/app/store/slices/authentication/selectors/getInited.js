@@ -1,0 +1,1 @@
+export const getInited = (state) => state.auth.isInit;

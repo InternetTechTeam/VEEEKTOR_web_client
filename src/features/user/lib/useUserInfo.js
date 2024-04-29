@@ -1,24 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserStatus } from "app/store/slices/user/selectors/userStatusSelector";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { getUserInfo } from "app/store/slices/user/thunks";
 import { selectIsLogin } from "app/store/slices/authentication/selectors/isLoginSelector";
-import { clearData } from "app/store/slices/user/userSlice";
+import { clearData, initUser } from "app/store/slices/user/userSlice";
+import { getInited } from "app/store/slices/authentication/selectors/getInited";
+import { selectUserInit } from "app/store/slices/user/selectors/userInitSelector";
 
 export const useUserInfo = () => {
     const isLogin = useSelector(selectIsLogin);
+    const isAuthInit = useSelector(getInited);
     const userStatus = useSelector(selectUserStatus);
+    const isUserInit = useSelector(selectUserInit);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if(isLogin) {
+    useLayoutEffect(() => {
+        if(isLogin && isAuthInit) {
             dispatch(getUserInfo());
+        }
+        else if(isAuthInit) {
+            dispatch(initUser());
         }
         else {
             dispatch(clearData());
         }
     }, 
-    [isLogin, dispatch]);
+    [isAuthInit, isLogin, dispatch]);
 
-    return {userStatus};
+    return {userStatus, isUserInit};
 }

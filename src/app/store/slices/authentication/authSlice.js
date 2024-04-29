@@ -10,11 +10,12 @@ const initialState = {
         email: undefined,
         errors: {}
     },
+    isInit: false, // флаг инициализации стейта логина
     error: undefined
 }
 
 export const authSlice = createSlice({
-    name: 'Auth',
+    name: 'auth',
     initialState,
     reducers: {
         setErrors: (state, action) => {
@@ -31,6 +32,9 @@ export const authSlice = createSlice({
         },
         clearFields: (state) => {
             state = initialState;
+        },
+        initAuth: (state) => {
+            state.isInit = true;
         }
     },
     extraReducers(builder) {
@@ -41,6 +45,7 @@ export const authSlice = createSlice({
         .addCase(signInUser.fulfilled, (state, action) => {
             state.status = AUTH_STATUS.SUCCESS;
             state.isLogin = true;
+            state.isInit = true;
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
         .addCase(signInUser.rejected, (state, action) => {
@@ -53,6 +58,7 @@ export const authSlice = createSlice({
         .addCase(checkAuth.fulfilled, (state, action) => {
             state.isLogin = true;
             state.status = AUTH_STATUS.SUCCESS;
+            state.isInit = true;
             localStorage.setItem(ACCESS_TOKEN_KEY, action.payload.access_token);
         })
         .addCase(checkAuth.rejected, () => {
@@ -60,13 +66,13 @@ export const authSlice = createSlice({
             localStorage.removeItem(ACCESS_TOKEN_KEY);
             return initialState;
         })
-        .addCase(logout.fulfilled, () => {
+        .addCase(logout.fulfilled, (state) => {
             localStorage.removeItem(ACCESS_TOKEN_KEY);
-            return initialState;
+            state.isLogin = false;
         })
     }
 });
 
-export const {setField,setInitialFields, clearFields, setErrors} = authSlice.actions;
+export const {setField,setInitialFields, clearFields, setErrors, initAuth} = authSlice.actions;
 
 export default authSlice.reducer;
