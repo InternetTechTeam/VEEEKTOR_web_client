@@ -1,0 +1,17 @@
+@import "app/styles/variables.scss";
+
+.footer {
+    padding: 20px;
+    background-color: $secondary-color;
+    width: 100%;
+}
+
+.logout {
+    font-size: 20px;
+    color: white;
+    background-color: inherit;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
+}

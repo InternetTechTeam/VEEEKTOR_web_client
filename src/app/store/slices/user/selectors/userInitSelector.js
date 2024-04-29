@@ -1,0 +1,1 @@
+export const selectUserInit = state => state.user.isInit;

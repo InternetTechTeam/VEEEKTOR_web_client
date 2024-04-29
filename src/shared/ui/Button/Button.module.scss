@@ -1,0 +1,16 @@
+@import "app/styles/variables.scss";
+
+.btn {
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    color: $secondary-color;
+    font-size: 16px;
+    padding: 15px 15px;
+    min-width: 200px;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+}
