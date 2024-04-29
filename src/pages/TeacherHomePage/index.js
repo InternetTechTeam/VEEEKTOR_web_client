@@ -1,3 +1,3 @@
-import TeacherHomePAge from "./ui/TeacherHomePage";
+import TeacherHomePage from "./ui/TeacherHomePage";
 
-export {TeacherHomePAge};
+export {TeacherHomePage as TeacherHomePAge};
