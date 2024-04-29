@@ -1,4 +1,14 @@
+@import "app/styles/variables.scss";
 
+.coursesList {
+    border: 1px solid $thirdy-color;
+    padding: 20px;
+
+}
+
+.message {
+    text-align: center;
+}
 
 .list {
     display: grid;
@@ -6,8 +16,10 @@
     grid-gap: 20px;
 
     &Wrapper {
+
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 30px;
     }
 }

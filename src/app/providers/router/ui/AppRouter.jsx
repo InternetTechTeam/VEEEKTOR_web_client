@@ -21,6 +21,7 @@ const AppRouter = () => {
     else if(isTeacher(name)) {
       defaultPath = routesPath[AppRoutes.TEACHER_HOME]
     }
+    
     return (
         <Routes>
             {Object.values(routeConfig).map(({path, element, access}) => (

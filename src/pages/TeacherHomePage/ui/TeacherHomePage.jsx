@@ -2,11 +2,13 @@ import {CoursesList} from "widgets/CoursesList";
 import Loading from "shared/ui/Loading/Loading";
 import { STATUS } from 'app/store/slices/config';
 import { useCourses } from "features/courses/lib/useCourses";
+import classes from "./TeacherHomePage.module.scss";
+import Button from "shared/ui/Button/Button";
 
-const TeacherHomePAge = () => {
+const TeacherHomePage = () => {
     const {coursesStatus} = useCourses();
     return (
-      <div className={""}>
+      <div className={classes.home}>
           <Loading isLoading={coursesStatus === STATUS.LOADING}>
               <h1 style={{textAlign:'center', marginBottom: '30px'}}>Мои курсы</h1>
               <CoursesList/>
@@ -15,4 +17,4 @@ const TeacherHomePAge = () => {
     )
 }
 
-export default TeacherHomePAge;
+export default TeacherHomePage;

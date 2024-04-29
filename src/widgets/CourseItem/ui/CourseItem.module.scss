@@ -1,0 +1,44 @@
+@import "app/styles/variables.scss";
+
+.courseItem {
+    height: 200px;
+    width: 250px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+
+.term {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.courseName {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.more {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.line {
+    height: 50px;
+    background-color: $secondary-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}

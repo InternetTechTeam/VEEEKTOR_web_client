@@ -1,4 +1,5 @@
 import { AuthorizationPage } from "pages/AuthorizationPage";
+import CourseCreationPage from "pages/CourseCreationPage/ui/CourseCreationPage";
 import { CoursePage } from "pages/CoursePage";
 import { HomePage } from "pages/HomePage";
 import { PersonalAreaPage } from "pages/PersonalAreaPage";
@@ -12,7 +13,9 @@ export const AppRoutes = {
 
     HOME: 'home',
     PROFILE: 'profile',
+
     COURSES: 'courses',
+    NEW_COURSE: 'new_course',
 
     TEACHER_HOME: 'teacher_home'
 };
@@ -31,10 +34,12 @@ export const routesPath = {
     [AppRoutes.SIGN_UP]: '/sign_up',
 
     [AppRoutes.HOME]: '/home',
+    [AppRoutes.TEACHER_HOME]: '/teacher_home',
     [AppRoutes.PROFILE]: '/profile',
-    [AppRoutes.COURSES]: '/courses/:id',
 
-    [AppRoutes.TEACHER_HOME]: '/teacher_home'
+    [AppRoutes.COURSES]: '/courses/:id',
+    [AppRoutes.NEW_COURSE]: '/courses/new_course'
+
 }
 
 export const routeConfig = {
@@ -60,20 +65,26 @@ export const routeConfig = {
         element: <HomePage/>,
         access: AccessFlags.STUDENT_ONLY
     },
+    [AppRoutes.TEACHER_HOME]: {
+        path: routesPath[AppRoutes.TEACHER_HOME],
+        element: <TeacherHomePAge/>,
+        access: AccessFlags.TEACHER_ONLY
+    },
     [AppRoutes.PROFILE]: {
         path: routesPath[AppRoutes.PROFILE],
         element: <PersonalAreaPage/>,
         access: AccessFlags.AUTH_ONLY
     },
+
     [AppRoutes.COURSES]: {
         path: routesPath[AppRoutes.COURSES],
         element: <CoursePage/>,
         access: AccessFlags.AUTH_ONLY
     },
 
-    [AppRoutes.TEACHER_HOME]: {
-        path: routesPath[AppRoutes.TEACHER_HOME],
-        element: <TeacherHomePAge/>,
+    [AppRoutes.NEW_COURSE]: {
+        path: routesPath[AppRoutes.NEW_COURSE],
+        element: <CourseCreationPage/>,
         access: AccessFlags.TEACHER_ONLY
     }
 }

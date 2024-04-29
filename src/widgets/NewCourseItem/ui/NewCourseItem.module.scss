@@ -1,0 +1,23 @@
+@import "app/styles/variables.scss";
+
+.courseItem {
+    height: 200px;
+    width: 250px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.icon {
+    height: 80px;
+    width: 80px;
+}
+
+.text {
+    position: absolute;
+    bottom: 15px;
+}
