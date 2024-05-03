@@ -18,7 +18,6 @@ const MAX_STAGE = 2;
 const MIN_STAGE = 0;
 
 const SignUpForm = () => {
-
   const [stage, setStage] = useState(MIN_STAGE);
 
   const {errors, ...fields} = useSelector(selectFields);
@@ -28,7 +27,7 @@ const SignUpForm = () => {
 const onChange = (e) => {
     const {name, value} = e.target;
     dispatch(setField({name, value}));
-  }
+}
 
 const stages = [
     <FullnameStage onChange={onChange} fields={fields} errors={errors}/>,

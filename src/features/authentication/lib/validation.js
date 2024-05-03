@@ -1,4 +1,7 @@
-const validationRules = {
+
+
+
+const validationAuthRules = {
     name: [required, nameFormat, minLength(2), maxLength(30)],
     surname: [required, nameFormat, minLength(2), maxLength(30)],
     patronymic: [required, nameFormat, minLength(2), maxLength(30)],
@@ -6,6 +9,27 @@ const validationRules = {
     password: [required, onlyEnglishLetters , minLength(8), maxLength(50)],
     dep_id: [required],
     env_id: [required]
+}
+
+const validationCourseRules = {
+    name: [required, courseNameFormat, minLength(5), maxLength(50)],
+    term: [required, termFormat],
+    teacher_id : [required],
+    dep_id: [required]
+}
+
+export const ValidationRules = {
+    AUTH: validationAuthRules,
+    COURSE: validationCourseRules
+}
+
+function termFormat(value) {
+    return !isNaN(value) && value > 0 ? undefined : 'Введите корректный номер семестра';
+}
+
+function courseNameFormat(value) {
+    const nameRegex = /^[a-zA-Zа-яА-Я\s]+$/;
+    return nameRegex.test(value) ? undefined : "Введите корректное название курса";
 }
 
 function emailFormat(value) {
@@ -48,14 +72,14 @@ function maxLength(max) {
     }
 }
 
-export function validate(values) {
+export function validate(values, rules = validationAuthRules) {
     let errors = {};
 
     for(let field in values) {
-        const rules = validationRules[field];
+        const currentRules = rules[field];
 
-        if(rules) {
-            let error = rules.reduce((error, rule) => {
+        if(currentRules) {
+            let error = currentRules.reduce((error, rule) => {
                 if(!error) return rule(values[field]);
                 return error;
             }, null);

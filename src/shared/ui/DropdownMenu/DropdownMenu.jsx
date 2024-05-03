@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from "./DropdownMenu.module.scss";
 
-const DropdownMenu = ({children, options}) => {
+const DropdownMenu = ({children, options, className}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 

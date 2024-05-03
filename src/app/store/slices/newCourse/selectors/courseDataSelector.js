@@ -1,0 +1,1 @@
+export const selectCourseData = state => state.newCourse.data;
