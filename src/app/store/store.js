@@ -3,7 +3,7 @@ import coursesReducer from "./slices/courses/coursesSlice";
 import authReducer from "./slices/authentication/authSlice";
 import signUpReducer from "./slices/signUp/signUpSlice";
 import userReducer from  "./slices/user/userSlice";
-import newCourseReducer from "./slices/newCourse/newCourseSlice";
+import courseCreationReducer from "./slices/newCourse/courseCreationSlice";
 
 
 
@@ -14,7 +14,7 @@ const setupStore = () => {
             auth: authReducer,
             signUp: signUpReducer,
             courses: coursesReducer,
-            newCourse: newCourseReducer,
+            courseCreation: courseCreationReducer,
             user: userReducer
         }
     });

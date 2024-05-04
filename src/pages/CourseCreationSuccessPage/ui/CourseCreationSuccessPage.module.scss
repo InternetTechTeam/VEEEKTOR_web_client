@@ -1,0 +1,21 @@
+@import "app/styles/variables.scss";
+
+.CourseCreationSuccessPage {
+
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.card {
+    width: 50%;
+    background-color: $thirdy-color;
+    height: 200px;
+}
+
+.links {
+    display: flex;
+
+}

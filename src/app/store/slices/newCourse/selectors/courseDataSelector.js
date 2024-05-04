@@ -1,1 +1,1 @@
-export const selectCourseData = state => state.newCourse.data;
+export const selectCourseData = state => state.courseCreation.data;

@@ -6,13 +6,16 @@ import classes from "./TeacherHomePage.module.scss";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeCourses } from "app/store/slices/courses/coursesSlice";
+import { clearFields as clearCreation } from "app/store/slices/newCourse/courseCreationSlice";
 
 const TeacherHomePage = () => {
     const {coursesStatus} = useCourses();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        return () => {dispatch(removeCourses())}
+        return () => {
+            dispatch(removeCourses());
+        }
     }, [dispatch])
     return (
       <div className={classes.home}>

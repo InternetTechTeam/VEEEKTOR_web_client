@@ -17,8 +17,8 @@ const initialState = {
     error: null
 }
 
-export const coursesSlice = createSlice({
-    name: "newCourse",
+export const courseCreationSlice = createSlice({
+    name: "courseCreation",
     initialState,
     reducers: {
     setErrors: (state, action) => {
@@ -40,7 +40,6 @@ export const coursesSlice = createSlice({
     extraReducers(builder) {
         builder
          .addCase(createCourse.fulfilled, (state, action) => {
-            console.log(action);
             state.status = STATUS.SUCCEEDED;
             state.course_id = action.payload.id;
          })
@@ -54,6 +53,6 @@ export const coursesSlice = createSlice({
     }
 });
 
-export const {setErrors, setField, clearFields, setId} = coursesSlice.actions;
+export const {setErrors, setField, clearFields, setId} = courseCreationSlice.actions;
 
-export default coursesSlice.reducer;
+export default courseCreationSlice.reducer;

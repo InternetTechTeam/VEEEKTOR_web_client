@@ -1,5 +1,7 @@
 import { AuthorizationPage } from "pages/AuthorizationPage";
-import CourseCreationPage from "pages/CourseCreationPage/ui/CourseCreationPage";
+import {CourseCreationPage} from "pages/CourseCreationPage";
+import { CourseCreationSuccessPage } from "pages/CourseCreationSuccessPage";
+import {CourseEditingPage} from "pages/CourseEditingPage";
 import { CoursePage } from "pages/CoursePage";
 import { HomePage } from "pages/HomePage";
 import { PersonalAreaPage } from "pages/PersonalAreaPage";
@@ -15,7 +17,9 @@ export const AppRoutes = {
     PROFILE: 'profile',
 
     COURSES: 'courses',
-    NEW_COURSE: 'new_course',
+    CREATION_COURSE: 'creation_course',
+    CREATION_COURSE_SUCCESS: 'creation_course_success',
+    EDIT_COURSE: 'edit_course',
 
     TEACHER_HOME: 'teacher_home'
 };
@@ -37,8 +41,16 @@ export const routesPath = {
     [AppRoutes.TEACHER_HOME]: '/teacher_home',
     [AppRoutes.PROFILE]: '/profile',
 
-    [AppRoutes.COURSES]: '/courses/:id',
-    [AppRoutes.NEW_COURSE]: '/courses/new_course'
+    [AppRoutes.COURSES]: {
+        BASE: '/courses/',
+        FULL: '/courses/:id'
+    },
+    [AppRoutes.CREATION_COURSE]: '/courses/creation',
+    [AppRoutes.CREATION_COURSE_SUCCESS]: '/courses/creatio/success',
+    [AppRoutes.EDIT_COURSE]: {
+        BASE: '/courses/editing/',
+        FULL: '/courses/editing/:course_id'
+    }
 
 }
 
@@ -77,14 +89,26 @@ export const routeConfig = {
     },
 
     [AppRoutes.COURSES]: {
-        path: routesPath[AppRoutes.COURSES],
+        path: routesPath[AppRoutes.COURSES].FULL,
         element: <CoursePage/>,
         access: AccessFlags.AUTH_ONLY
     },
 
-    [AppRoutes.NEW_COURSE]: {
-        path: routesPath[AppRoutes.NEW_COURSE],
+    [AppRoutes.CREATION_COURSE]: {
+        path: routesPath[AppRoutes.CREATION_COURSE],
         element: <CourseCreationPage/>,
+        access: AccessFlags.TEACHER_ONLY,
+    },
+
+    [AppRoutes.CREATION_COURSE_SUCCESS]: {
+        path: routesPath[AppRoutes.CREATION_COURSE_SUCCESS],
+        element: <CourseCreationSuccessPage/>,
+        access: AccessFlags.TEACHER_ONLY,
+    },
+
+    [AppRoutes.EDIT_COURSE]: {
+        path: routesPath[AppRoutes.EDIT_COURSE].FULL,
+        element: <CourseEditingPage/>,
         access: AccessFlags.TEACHER_ONLY
     }
 }

@@ -4,7 +4,7 @@ import classes from "./CourseCreationForm.module.scss";
 import Input from "shared/ui/Input/Input";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCourseData } from 'app/store/slices/newCourse/selectors/courseDataSelector';
-import { clearFields, setErrors, setField, setId } from 'app/store/slices/newCourse/newCourseSlice';
+import { clearFields, setErrors, setField, setId } from 'app/store/slices/newCourse/courseCreationSlice';
 import { validate } from 'features/authentication';
 import { ValidationRules } from 'features/authentication/lib/validation';
 import { selectUserData } from 'app/store/slices/user/selectors/userDataSelector';
@@ -20,10 +20,6 @@ const CourseCreationForm = () => {
 
 useEffect(() => {
     dispatch(setId({teacher_id, dep_id}));
-
-    return () => {
-        dispatch(clearFields())
-    }
 }, [courseData]);
 
 const onChange = (e) => {
