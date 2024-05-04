@@ -22,7 +22,7 @@ const CourseItem = ({data}) => {
         <TeacherOnly>
           <img className={classes.edit} src={edit} alt="edit"/>
         </TeacherOnly>
-        <CourseItemMenu className={classes.more}>
+        <CourseItemMenu id={id} className={classes.more}>
           <img  src={more} alt="more"/>
         </CourseItemMenu>
       </div>
