@@ -1,0 +1,36 @@
+@import "app/styles/variables.scss";
+
+.Tabs {
+
+}
+
+.TabList {
+    border: 2px solid $thirdy-color;
+    padding: 10px;
+    height: 70px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.Tab {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-width: 100px;
+}
+
+.TabContent {
+    border: 3px solid $thirdy-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.Active {
+    color: $clickable-color;
+    border-bottom: 3px solid $clickable-color;
+}

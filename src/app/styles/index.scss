@@ -19,10 +19,11 @@ code {
 
 a {
     text-decoration: none;
-    color: white;
+    color: $clickable-color;
 
     &:hover {
         text-decoration: underline;
+        color: $clickable-color;
     }
 }
 
