@@ -4,11 +4,15 @@ import { createCourse } from "./thunks";
 
 const initialState = {
     courseData: undefined,
-    coursePropFields: {
+    coursePropsFields: {
         name: "",
-        term: ""
+        term: "",
+        errors: {}
     },
-    validationErrors: {},
+    mainPageMarkdown: "",
+    tests: [],
+    labs: [],
+    infos: [],
     status: STATUS.IDLE,
     error: null
 }

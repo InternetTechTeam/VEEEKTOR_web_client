@@ -4,10 +4,10 @@ import { classNames } from "shared/lib/classNames/classNames";
 import TabContent from "./TabContent";
 import TabList from "./TabList";
 
-const Tabs = ({className, children}) => {
+const Tabs = ({className, children, position}) => {
     const [activeTab, setActiveTab] = useState(0);
   return (
-    <div className={classNames(classes.Tabs)}>
+    <div className={classNames(classes.Tabs, {}, [classes[position]])}>
         <TabList tabs={children} activeTab={activeTab} setActiveTab={setActiveTab}/>
         <TabContent>
             {React.Children.toArray(children)[activeTab].props.content}

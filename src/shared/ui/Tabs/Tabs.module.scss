@@ -1,33 +1,33 @@
 @import "app/styles/variables.scss";
 
 .Tabs {
-
+    display: flex;
+    flex-direction: column;
 }
 
 .TabList {
     border: 2px solid $thirdy-color;
-    padding: 10px;
-    height: 70px;
     display: flex;
+    flex-direction: row;
+    height: 70px;
+    padding: 10px;
     margin-bottom: 10px;
 }
 
 .Tab {
+    min-width: 100px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 5px;
     padding-right: 5px;
-    min-width: 100px;
 }
 
 .TabContent {
     border: 3px solid $thirdy-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    padding: 10px;
+    width: 100%;
 }
 
 .Active {
