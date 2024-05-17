@@ -12,7 +12,7 @@ const validationAuthRules = {
 }
 
 const validationCourseRules = {
-    name: [required, courseNameFormat, minLength(5), maxLength(50)],
+    name: [required, minLength(5), maxLength(50)],
     term: [required, termFormat],
     teacher_id : [required],
     dep_id: [required]
@@ -27,10 +27,10 @@ function termFormat(value) {
     return !isNaN(value) && value > 0 ? undefined : 'Введите корректный номер семестра';
 }
 
-function courseNameFormat(value) {
-    const nameRegex = /^[a-zA-Zа-яА-Я\s]+$/;
-    return nameRegex.test(value) ? undefined : "Введите корректное название курса";
-}
+// function courseNameFormat(value) {
+//     const nameRegex = /^[a-zA-Zа-яА-Я\s]+$/;
+//     return nameRegex.test(value) ? undefined : "Введите корректное название курса";
+// }
 
 function emailFormat(value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

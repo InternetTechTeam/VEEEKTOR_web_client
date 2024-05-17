@@ -43,7 +43,7 @@ export const routesPath = {
 
     [AppRoutes.COURSES]: {
         BASE: '/courses/',
-        FULL: '/courses/:id'
+        FULL: '/courses/:course_id'
     },
     [AppRoutes.CREATION_COURSE]: '/courses/creation',
     [AppRoutes.CREATION_COURSE_SUCCESS]: '/courses/creatio/success',

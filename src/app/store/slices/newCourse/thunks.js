@@ -6,12 +6,10 @@ export const createCourse = createAsyncThunk("courses/newCourse",
 async (_, thunkAPI) => {
     const courseData = selectCourseData(thunkAPI.getState());
     try {
-        const response = await CourseService.createNewCourse(courseData);
+        const response = await CourseService.postCourse(courseData);
         return response.data;
     } 
     catch(error) {
        throw error;
     }
-
-}
-)
+});

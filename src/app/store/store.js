@@ -4,6 +4,7 @@ import authReducer from "./slices/authentication/authSlice";
 import signUpReducer from "./slices/signUp/signUpSlice";
 import userReducer from  "./slices/user/userSlice";
 import courseCreationReducer from "./slices/newCourse/courseCreationSlice";
+import courseEditingReducer from "./slices/courseEditing/courseEditingSlice";
 
 
 
@@ -15,6 +16,7 @@ const setupStore = () => {
             signUp: signUpReducer,
             courses: coursesReducer,
             courseCreation: courseCreationReducer,
+            courseEditing: courseEditingReducer,
             user: userReducer
         }
     });

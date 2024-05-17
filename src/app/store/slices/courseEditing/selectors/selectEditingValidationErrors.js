@@ -1,0 +1,1 @@
+export const selectEditingValidationErrors = state => state.courseEditing.validationErrors;

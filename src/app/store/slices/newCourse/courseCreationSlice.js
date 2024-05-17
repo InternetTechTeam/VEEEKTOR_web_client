@@ -9,10 +9,9 @@ const initialState = {
         teacher_id : 0,
         markdown :"",
         dep_id : 0,
+        course_id: undefined,
+        errors: {},
     },
-    prevData: null,
-    course_id: null,
-    validationErrors: {},
     status: STATUS.IDLE,
     error: null
 }
@@ -22,7 +21,7 @@ export const courseCreationSlice = createSlice({
     initialState,
     reducers: {
     setErrors: (state, action) => {
-        state.validationErrors = action.payload;
+        state.data.errors = action.payload;
     },
     setField: (state, action) => {
         const {name, value} = action.payload;
@@ -41,14 +40,13 @@ export const courseCreationSlice = createSlice({
         builder
          .addCase(createCourse.fulfilled, (state, action) => {
             state.status = STATUS.SUCCEEDED;
-            state.course_id = action.payload.id;
+            state.data.course_id = action.payload.id;
          })
          .addCase(createCourse.pending, (state) => {
             state.status = STATUS.LOADING;
          })
          .addCase(createCourse.rejected, (state, action) => {
             state.status = STATUS.FAILED;
-            console.log(action);
          })
     }
 });

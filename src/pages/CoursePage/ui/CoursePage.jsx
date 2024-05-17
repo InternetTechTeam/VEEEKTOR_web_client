@@ -11,14 +11,14 @@ import MdContent from 'shared/md/MdContent/MdContent';
 
 const CoursePage = () => {
 
-  const {id} = useParams();
+  const {course_id} = useParams();
   const dispatch = useDispatch();
   const status = useSelector(selectCoursesStatus);
   const course = useSelector(selectCurrentCourse);
 
   useLayoutEffect(() => {
-    dispatch(getCourseById(id));
-  }, [dispatch, id])
+    dispatch(getCourseById(course_id));
+  }, [dispatch, course_id])
 
   return (
     <div className={classes.page}>
@@ -26,8 +26,6 @@ const CoursePage = () => {
             <MdContent content={course?.markdown}/>
           </Loading>
     </div>
-
-  )
-}
+  )}
 
 export default CoursePage;

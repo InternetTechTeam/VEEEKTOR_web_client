@@ -1,24 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { STATUS } from "../config";
-import { createCourse } from "./thunks";
+import { getCourseById } from "../courses/thunks";
+import { updateCourse } from "app/store/thunks/courses/updateCourse";
 
 const initialState = {
-    courseData: undefined,
-    coursePropsFields: {
-        name: "",
-        term: "",
-        errors: {}
+    course: {
+        id: undefined,
+        name: undefined,
+        term: undefined,
+        teacher_id: undefined,
+        markdown: undefined,
+        dep_id: undefined,
     },
-    mainPageMarkdown: "",
-    tests: [],
-    labs: [],
-    infos: [],
-    status: STATUS.IDLE,
+    validationErrors: {},
+    isInit: false,
+    status: STATUS.LOADING,
     error: null
 }
 
 export const courseEditingSlice = createSlice({
-    name: "courseCreation",
+    name: "courseEditing",
     initialState,
     reducers: {
     setErrors: (state, action) => {
@@ -26,33 +27,36 @@ export const courseEditingSlice = createSlice({
     },
     setField: (state, action) => {
         const {name, value} = action.payload;
-        state.data[name] = value;
-    },
-    setId: (state, action) => {
-        const {teacher_id, dep_id} = action.payload;
-        state.data.teacher_id = teacher_id;
-        state.data.dep_id = dep_id;
+        state.course[name] = value; 
     },
     clearFields: (state) => {
         state = initialState;
     }
     },
     extraReducers(builder) {
-        builder
-         .addCase(createCourse.fulfilled, (state, action) => {
-            state.status = STATUS.SUCCEEDED;
-            state.course_id = action.payload.id;
-         })
-         .addCase(createCourse.pending, (state) => {
-            state.status = STATUS.LOADING;
-         })
-         .addCase(createCourse.rejected, (state, action) => {
+        builder.
+        addCase(getCourseById.fulfilled, (state, action) => {
+            state.course = action.payload;
+            state.status = STATUS.IDLE;
+            state.isInit = true;
+        }).
+        addCase(getCourseById.rejected,
+        (state, action) => {
             state.status = STATUS.FAILED;
-            console.log(action);
-         })
+        }).
+        addCase(updateCourse.pending, (state) => {
+            state.status = STATUS.LOADING;
+        }).
+        addCase(updateCourse.fulfilled, (state) => {
+            state.status = STATUS.SUCCEEDED;
+        }).
+        addCase(updateCourse.rejected, (state, action) => {
+            state.status = STATUS.FAILED;
+            state.error = action.error;
+        })
     }
 });
 
-export const {setErrors, setField, clearFields, setId} = courseCreationSlice.actions;
+export const {setErrors, setField, clearFields, setId, initFields} = courseEditingSlice.actions;
 
-export default courseCreationSlice.reducer;
+export default courseEditingSlice.reducer;

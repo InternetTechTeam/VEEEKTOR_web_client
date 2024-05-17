@@ -10,12 +10,13 @@ import { ValidationRules } from 'features/authentication/lib/validation';
 import { selectUserData } from 'app/store/slices/user/selectors/userDataSelector';
 import Button from 'shared/ui/Button/Button';
 import { createCourse } from 'app/store/slices/newCourse/thunks';
+import Error from 'shared/ui/Error/Error';
 
 
 const CourseCreationForm = () => {
 
     const dispatch = useDispatch();
-    const courseData = useSelector(selectCourseData);
+    const {errors, ...courseData} = useSelector(selectCourseData);
     const {id: teacher_id, department: {id : dep_id}} = useSelector(selectUserData);
 
 useEffect(() => {
@@ -47,11 +48,15 @@ const validateFields = () => {
     <form onSubmit={onSendForm} className={classNames(classes.CourseCreationForm)}>
         <div>
             <label htmlFor="name">Название курса:</label>
-            <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
+            <Error message={errors.name}>
+                <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
+            </Error>
         </div>
         <div>
             <label htmlFor="term">Семестр:</label>
-            <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
+            <Error message={errors.term}>
+                <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
+            </Error>
         </div>
         <Button>Создать</Button>
     </form>
