@@ -9,7 +9,7 @@ import NestedPagesEditingMode from 'widgets/NestedPagesEditingMode/ui/NestedPage
 
 const EditingModeTabs = () => {
   return (
-    <Tabs position={TABS_POSITION.TOP}>
+    <Tabs position={TABS_POSITION.TOP} onFullPage={false}>
         <TabOption
         title={"Свойства курса"}
         content={<CoursePropertiesEditingMode/>}

@@ -1,9 +1,17 @@
 import React from 'react'
-import "./Preloader.scss"
+import loader from "shared/assets/icons/loader.svg";
 
-const Preloader = () => {
+const Preloader = ({isLoading, size}) => {
   return (
-    <div className='loader'></div>
+    isLoading 
+    ?
+      <img
+      src={loader}
+      alt="loader"
+      style={{width: `${size || 100}px`, height: `${size || 100}px`}}
+    />
+    :
+      null
   )
 }
 

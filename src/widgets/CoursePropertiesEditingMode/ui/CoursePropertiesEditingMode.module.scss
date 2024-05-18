@@ -1,4 +1,11 @@
 .CoursePropertiesEditingMode {
-    height: 100%;
+    height: 500px;
     padding: 30px;
+}
+
+.CourseEditingForm {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

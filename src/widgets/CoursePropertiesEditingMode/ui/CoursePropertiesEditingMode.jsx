@@ -8,12 +8,11 @@ import { validate } from 'features/authentication';
 import { ValidationRules } from 'features/authentication/lib/validation';
 import Error from 'shared/ui/Error/Error';
 import Input from 'shared/ui/Input/Input';
-import Button from 'shared/ui/Button/Button';
 import { selectEditingValidationErrors } from 'app/store/slices/courseEditing/selectors/selectEditingValidationErrors';
 import { updateCourse } from 'app/store/thunks/courses/updateCourse';
 import { selectEditingStatus } from 'app/store/slices/courseEditing/selectors/selectEditingStatus';
-import Loading from 'shared/ui/Loading/Loading';
 import { STATUS } from 'app/store/slices/config';
+import ButtonLoader from 'shared/ui/ButtonLoader/ButtonLoader';
 
 const CoursePropertiesEditingMode = () => {
 
@@ -43,23 +42,27 @@ const CoursePropertiesEditingMode = () => {
 
   return (
     <div className={classNames(classes.CoursePropertiesEditingMode)}>
-      <Loading isLoading={status === STATUS.LOADING}>
-        <form onSubmit={onSendForm} className={classNames(classes.CourseCreationForm)}>
+        <form onSubmit={onSendForm} className={classNames(classes.CourseEditingForm)}>
             <div>
-                <label htmlFor="name">Название курса:</label>
-                <Error message={errors.name}>
-                    <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
-                </Error>
+                <div>
+                    <label htmlFor="name">Название курса:</label>
+                    <Error message={errors.name}>
+                        <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
+                    </Error>
+                </div>
+                <div>
+                    <label htmlFor="term">Семестр:</label>
+                    <Error message={errors.term}>
+                        <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
+                    </Error>
+                </div>
             </div>
-            <div>
-                <label htmlFor="term">Семестр:</label>
-                <Error message={errors.term}>
-                    <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
-                </Error>
-            </div>
-            <Button>Сохранить</Button>
+            <ButtonLoader
+            isLoading = {status === STATUS.LOADING}
+            >
+            Сохранить
+            </ButtonLoader>
         </form>
-      </Loading>
     </div>
   )
 }

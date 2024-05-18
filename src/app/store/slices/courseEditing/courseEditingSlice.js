@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { STATUS } from "../config";
 import { getCourseById } from "../courses/thunks";
 import { updateCourse } from "app/store/thunks/courses/updateCourse";
+import { notify } from "shared/lib/notify/notify";
 
 const initialState = {
     course: {
@@ -49,9 +50,11 @@ export const courseEditingSlice = createSlice({
         }).
         addCase(updateCourse.fulfilled, (state) => {
             state.status = STATUS.SUCCEEDED;
+            notify("Данные обновлены");
         }).
         addCase(updateCourse.rejected, (state, action) => {
             state.status = STATUS.FAILED;
+            notify("Ошибка", state.status);
             state.error = action.error;
         })
     }
