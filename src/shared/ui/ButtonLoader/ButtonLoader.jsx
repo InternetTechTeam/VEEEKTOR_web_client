@@ -1,7 +1,6 @@
 import React from 'react';
-
 import classes from './ButtonLoader.module.scss'
-import Preloader from '../Preloader/Preloader';
+import Loader from '../Loader/Loader';
 
 const ButtonLoader = (props) => {
     const {children, isLoading, ...otherProps} = props;
@@ -10,7 +9,7 @@ const ButtonLoader = (props) => {
             <button {...otherProps} className={classes.btn}>
                 {children}
             </button>
-            <Preloader isLoading={isLoading} size={40}/>
+            <Loader isLoading={isLoading} size={40}/>
         </div>
     )
 }

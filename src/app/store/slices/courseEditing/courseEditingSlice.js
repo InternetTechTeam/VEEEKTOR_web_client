@@ -30,8 +30,8 @@ export const courseEditingSlice = createSlice({
         const {name, value} = action.payload;
         state.course[name] = value; 
     },
-    clearFields: (state) => {
-        state = initialState;
+    clearEditingFields: () => {
+        return initialState;
     }
     },
     extraReducers(builder) {
@@ -60,6 +60,6 @@ export const courseEditingSlice = createSlice({
     }
 });
 
-export const {setErrors, setField, clearFields, setId, initFields} = courseEditingSlice.actions;
+export const {setErrors, setField, clearEditingFields, setId, initFields} = courseEditingSlice.actions;
 
 export default courseEditingSlice.reducer;

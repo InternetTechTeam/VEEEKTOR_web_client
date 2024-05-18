@@ -1,0 +1,1 @@
+export const selectCourseId = state => state.courseCreation.course_id;

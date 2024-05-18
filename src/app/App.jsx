@@ -1,7 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AppRouter } from './providers/router';
-import Loading from "shared/ui/Loading/Loading";
 import ScrollOnTop from "shared/ui/ScrollOnTop/ScrollOnTop";
 import {useCheckAuth} from "features/authentication/lib/useCheckAuth";
 import {useUserInfo} from "features/user/lib/useUserInfo";
@@ -9,6 +8,7 @@ import AuthRequire from 'shared/ui/AuthRequire/AithRequire';
 import { Header } from 'widgets/Header';
 import { Footer } from 'widgets/Footer';
 import { ToastContainer } from 'react-toastify';
+import PageLoader from 'shared/ui/PageLoader/PageLoader';
 
 function App() {
     const {authStatus, isInit: isAuthInit} = useCheckAuth();
@@ -27,9 +27,9 @@ function App() {
                 </div>
             </AuthRequire>
             <div className="content">
-                <Loading isLoading={!isAuthInit || !isUserInit}>
+                <PageLoader isLoading={!isAuthInit || !isUserInit}>
                     {<AppRouter/>}
-                </Loading>
+                </PageLoader>
             </div>
         </div>
         <AuthRequire>

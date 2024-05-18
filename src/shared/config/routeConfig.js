@@ -1,6 +1,5 @@
 import { AuthorizationPage } from "pages/AuthorizationPage";
 import {CourseCreationPage} from "pages/CourseCreationPage";
-import { CourseCreationSuccessPage } from "pages/CourseCreationSuccessPage";
 import {CourseEditingPage} from "pages/CourseEditingPage";
 import { CoursePage } from "pages/CoursePage";
 import { HomePage } from "pages/HomePage";
@@ -46,7 +45,6 @@ export const routesPath = {
         FULL: '/courses/:course_id'
     },
     [AppRoutes.CREATION_COURSE]: '/courses/creation',
-    [AppRoutes.CREATION_COURSE_SUCCESS]: '/courses/creatio/success',
     [AppRoutes.EDIT_COURSE]: {
         BASE: '/courses/editing/',
         FULL: '/courses/editing/:course_id'
@@ -99,13 +97,6 @@ export const routeConfig = {
         element: <CourseCreationPage/>,
         access: AccessFlags.TEACHER_ONLY,
     },
-
-    [AppRoutes.CREATION_COURSE_SUCCESS]: {
-        path: routesPath[AppRoutes.CREATION_COURSE_SUCCESS],
-        element: <CourseCreationSuccessPage/>,
-        access: AccessFlags.TEACHER_ONLY,
-    },
-
     [AppRoutes.EDIT_COURSE]: {
         path: routesPath[AppRoutes.EDIT_COURSE].FULL,
         element: <CourseEditingPage/>,

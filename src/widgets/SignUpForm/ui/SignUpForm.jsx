@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'shared/ui/Button/Button';
 import { Link } from 'react-router-dom';
-import Preloader from 'shared/ui/Preloader/Preloader';
+import Spinner from 'shared/ui/Spinner/Spinner';
 import {SuccessSignUp} from 'widgets/SuccessSignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFields } from 'app/store/slices/signUp/selectors/fieldsSelector';
@@ -59,7 +59,7 @@ const stages = [
   }
 
   if(status === SIGN_UP_STATUS.LOADING) {
-      return <Preloader/>
+      return <Spinner/>
   };
 
   if(status === SIGN_UP_STATUS.SUCCESS) {

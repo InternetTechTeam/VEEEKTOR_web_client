@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { selectCourseData } from "./selectors/courseDataSelector";
+import { selectCourseData } from "./selectors/selectCourseData/selectCourseData";
 import { CourseService } from "features/courses";
 
 export const createCourse = createAsyncThunk("courses/newCourse",
