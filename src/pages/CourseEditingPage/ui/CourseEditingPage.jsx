@@ -8,6 +8,7 @@ import { getCourseById } from 'app/store/slices/courses/thunks';
 import { clearEditingFields, initFields } from 'app/store/slices/courseEditing/courseEditingSlice';
 import PageLoader from 'shared/ui/PageLoader/PageLoader';
 import { selectEditingInit } from 'app/store/slices/courseEditing/selectors/selectEditingInit';
+import { initNestedPages } from 'app/store/slices/nestedPages/nestedPagesSlice';
 
 const CourseEditingPage = () => {
 
@@ -17,7 +18,7 @@ const CourseEditingPage = () => {
 
   useEffect(() => {
     dispatch(getCourseById(course_id));
-
+    dispatch(initNestedPages(course_id));
     return () => {
       dispatch(clearEditingFields());
     }

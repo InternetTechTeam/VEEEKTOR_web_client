@@ -3,6 +3,7 @@ import {CourseCreationPage} from "pages/CourseCreationPage";
 import {CourseEditingPage} from "pages/CourseEditingPage";
 import { CoursePage } from "pages/CoursePage";
 import { HomePage } from "pages/HomePage";
+import { InfoPage } from "pages/InfoPage";
 import { PersonalAreaPage } from "pages/PersonalAreaPage";
 import { TeacherHomePAge } from "pages/TeacherHomePage";
 import { SignInForm } from "widgets/SIgnInForm";
@@ -17,8 +18,12 @@ export const AppRoutes = {
 
     COURSES: 'courses',
     CREATION_COURSE: 'creation_course',
-    CREATION_COURSE_SUCCESS: 'creation_course_success',
     EDIT_COURSE: 'edit_course',
+    LABS: 'labs',
+    EDIT_LAB: 'edit_lab',
+    LAB_CREATION: 'creation_lab',
+    TESTS: 'tests',
+    INFOS: 'infos',
 
     TEACHER_HOME: 'teacher_home'
 };
@@ -43,6 +48,10 @@ export const routesPath = {
     [AppRoutes.COURSES]: {
         BASE: '/courses/',
         FULL: '/courses/:course_id'
+    },
+    [AppRoutes.INFOS]: {
+        BASE: '/courses/:course_id/infos',
+        FULL: '/courses/:course_id/infos/:info_id',
     },
     [AppRoutes.CREATION_COURSE]: '/courses/creation',
     [AppRoutes.EDIT_COURSE]: {
@@ -91,7 +100,6 @@ export const routeConfig = {
         element: <CoursePage/>,
         access: AccessFlags.AUTH_ONLY
     },
-
     [AppRoutes.CREATION_COURSE]: {
         path: routesPath[AppRoutes.CREATION_COURSE],
         element: <CourseCreationPage/>,
@@ -101,5 +109,10 @@ export const routeConfig = {
         path: routesPath[AppRoutes.EDIT_COURSE].FULL,
         element: <CourseEditingPage/>,
         access: AccessFlags.TEACHER_ONLY
+    },
+    [AppRoutes.INFOS]: {
+        path: routesPath[AppRoutes.INFOS].FULL,
+        element: <InfoPage/>,
+        access: AccessFlags.AUTH_ONLY
     }
 }

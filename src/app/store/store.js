@@ -5,6 +5,7 @@ import signUpReducer from "./slices/signUp/signUpSlice";
 import userReducer from  "./slices/user/userSlice";
 import courseCreationReducer from "./slices/newCourse/courseCreationSlice";
 import courseEditingReducer from "./slices/courseEditing/courseEditingSlice";
+import nestedPageReducer from "./slices/nestedPages/nestedPagesSlice";
 
 
 
@@ -17,7 +18,8 @@ const setupStore = () => {
             courses: coursesReducer,
             courseCreation: courseCreationReducer,
             courseEditing: courseEditingReducer,
-            user: userReducer
+            user: userReducer,
+            nestedPages: nestedPageReducer
         }
     });
 }

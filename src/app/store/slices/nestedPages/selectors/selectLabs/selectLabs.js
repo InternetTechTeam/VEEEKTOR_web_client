@@ -1,0 +1,1 @@
+export const selectLabs = state => state.nestedPages.labs;
