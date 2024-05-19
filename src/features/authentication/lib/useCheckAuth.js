@@ -5,6 +5,7 @@ import { selectAuthStatus } from "app/store/slices/authentication/selectors/auth
 import { checkAuth } from "app/store/slices/authentication/thunks";
 import { getInited } from "app/store/slices/authentication/selectors/getInited";
 import { initAuth } from "app/store/slices/authentication/authSlice";
+
 export const useCheckAuth = () => {
     const dispatch = useDispatch();
     const authStatus = useSelector(selectAuthStatus);

@@ -1,6 +1,3 @@
-
-
-
 const validationAuthRules = {
     name: [required, nameFormat, minLength(2), maxLength(30)],
     surname: [required, nameFormat, minLength(2), maxLength(30)],
@@ -26,11 +23,6 @@ export const ValidationRules = {
 function termFormat(value) {
     return !isNaN(value) && value > 0 ? undefined : 'Введите корректный номер семестра';
 }
-
-// function courseNameFormat(value) {
-//     const nameRegex = /^[a-zA-Zа-яА-Я\s]+$/;
-//     return nameRegex.test(value) ? undefined : "Введите корректное название курса";
-// }
 
 function emailFormat(value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

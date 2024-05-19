@@ -1,18 +1,34 @@
+import { Endpoints, Options } from "shared/config/httpConfig";
 import $api from "../../http";
+import { buildQueryString } from "shared/lib/buildQueryString/buildQueryString";
 
 class CourseService {
     static getAllCourses = async () => {
-        return await $api.get("courses");
+        return await $api.get(Endpoints.COURSES);
     }
 
     static getCourseById = async (id) => {
-        return await $api.get(`courses?id=${id}`);
+        return await $api.get(
+            buildQueryString(
+                Endpoints.COURSES,
+                {[Options.ID] : id}
+            ));
     }
 
     static postCourse = async (courseData) => {
-        const {name, term, teacher_id, markdown, dep_id} = courseData;
+        let {name, term, teacher_id, markdown, dep_id} = courseData;
+        term = Number(term);
+        teacher_id = Number(teacher_id);
+        dep_id = Number(dep_id);
         return await $api.post(
-            "courses", {name, term: Number(term), teacher_id: Number(teacher_id), markdown, dep_id : Number(dep_id)});
+            Endpoints.COURSES,
+            {
+                name,
+                term,
+                teacher_id,
+                markdown, 
+                dep_id
+            });
     }
 
     static putCourse = async (courseData) => {
@@ -20,7 +36,7 @@ class CourseService {
         id = Number(id);
         term = Number(term);
         return await $api.put(
-            "courses",
+            Endpoints.COURSES,
             {
                 id,
                 name,

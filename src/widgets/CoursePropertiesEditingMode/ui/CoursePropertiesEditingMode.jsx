@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectEditingCourse } from 'app/store/slices/courseEditing/selectors/selectEditingCourse';
 import { setErrors, setField } from 'app/store/slices/courseEditing/courseEditingSlice';
 import { validate } from 'features/authentication';
-import { ValidationRules } from 'features/authentication/lib/validation';
+import { ValidationRules } from 'features/validation/lib/validation';
 import Error from 'shared/ui/Error/Error';
 import Input from 'shared/ui/Input/Input';
 import { selectEditingValidationErrors } from 'app/store/slices/courseEditing/selectors/selectEditingValidationErrors';

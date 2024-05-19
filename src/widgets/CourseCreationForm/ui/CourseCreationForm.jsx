@@ -5,7 +5,7 @@ import Input from "shared/ui/Input/Input";
 import { useDispatch, useSelector } from 'react-redux';
 import {setErrors, setField, setId } from 'app/store/slices/newCourse/courseCreationSlice';
 import { validate } from 'features/authentication';
-import { ValidationRules } from 'features/authentication/lib/validation';
+import { ValidationRules } from 'features/validation/lib/validation';
 import { selectUserData} from 'app/store/slices/user/selectors/userDataSelector';
 import { createCourse } from 'app/store/slices/newCourse/thunks';
 import Error from 'shared/ui/Error/Error';
