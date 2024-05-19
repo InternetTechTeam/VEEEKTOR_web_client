@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../config";
-import { getAllNestedPages } from "app/store/thunks/nested/getAllNestedPages";
+import { getAllNestedPages } from "app/store/thunks/nested/lib/all/getAllNestedPages";
+import { deleteInfo } from "app/store/thunks/nested/lib/infos/deleteInfo";
+import { notify } from "shared/lib/notify/notify";
 
 const initialState = {
     labs: [],
@@ -33,6 +35,17 @@ export const nestedPagesSlice = createSlice({
             state.labs = labs;
             state.tests = tests;
             state.status = STATUS.SUCCEEDED;
+        })
+        .addCase(deleteInfo.pending, (state) => {
+            state.status = STATUS.LOADING;
+        })
+        .addCase(deleteInfo.fulfilled, (state) => {
+            state.status =STATUS.SUCCEEDED;
+            notify("Страница удалена");
+        })
+        .addCase(deleteInfo.rejected, (state) => {
+            state.status = STATUS.FAILED;
+            notify("Ошибка");
         })
     }
 })

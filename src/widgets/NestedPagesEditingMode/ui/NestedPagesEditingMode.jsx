@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import PageLoader from "shared/ui/PageLoader/PageLoader"
 import { selectNestedStatus } from "app/store/slices/nestedPages/selectors"
 import { STATUS } from "app/store/slices/config"
-import { getAllNestedPages } from "app/store/thunks/nested/getAllNestedPages"
+import { getAllNestedPages } from "app/store/thunks/nested/lib/all/getAllNestedPages"
 import NestedPageTypeTabs from "./NestedPageTypeTabs"
 
 const NestedPagesEditingMode = () => {
