@@ -1,17 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { selectCourseData } from "./selectors/courseDataSelector";
+import { selectCourseData } from "./selectors/selectCourseData/selectCourseData";
 import { CourseService } from "features/courses";
 
 export const createCourse = createAsyncThunk("courses/newCourse",
 async (_, thunkAPI) => {
     const courseData = selectCourseData(thunkAPI.getState());
     try {
-        const response = await CourseService.createNewCourse(courseData);
+        const response = await CourseService.postCourse(courseData);
         return response.data;
     } 
     catch(error) {
        throw error;
     }
-
-}
-)
+});

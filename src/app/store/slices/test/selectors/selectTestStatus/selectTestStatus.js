@@ -1,0 +1,1 @@
+export const selectTestStatus = state => state.test.status;

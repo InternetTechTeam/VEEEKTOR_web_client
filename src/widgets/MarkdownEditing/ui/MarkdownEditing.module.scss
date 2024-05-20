@@ -1,0 +1,18 @@
+@import "app/styles/variables.scss";
+
+
+.MarkdownEditing {
+    height: $page-height;
+}
+
+.MdField {
+    resize: none;
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    border: 3px solid white;
+    // white-space: pre-wrap;
+}

@@ -1,0 +1,1 @@
+export const selectInfoData = state => state.info.data;

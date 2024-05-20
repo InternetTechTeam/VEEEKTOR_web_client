@@ -3,27 +3,25 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import classes from "./CourseCreationForm.module.scss";
 import Input from "shared/ui/Input/Input";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCourseData } from 'app/store/slices/newCourse/selectors/courseDataSelector';
-import { clearFields, setErrors, setField, setId } from 'app/store/slices/newCourse/newCourseSlice';
+import {setErrors, setField, setId } from 'app/store/slices/newCourse/courseCreationSlice';
 import { validate } from 'features/authentication';
-import { ValidationRules } from 'features/authentication/lib/validation';
-import { selectUserData } from 'app/store/slices/user/selectors/userDataSelector';
-import Button from 'shared/ui/Button/Button';
+import { ValidationRules } from 'features/validation/lib/validation';
+import { selectUserData} from 'app/store/slices/user/selectors/userDataSelector';
 import { createCourse } from 'app/store/slices/newCourse/thunks';
+import Error from 'shared/ui/Error/Error';
+import ButtonLoader from 'shared/ui/ButtonLoader/ButtonLoader';
+import { STATUS } from 'app/store/slices/config';
+import { selectCourseData, selectValidationErrors } from 'app/store/slices/newCourse/selectors';
 
-
-const CourseCreationForm = () => {
+const CourseCreationForm = ({status}) => {
 
     const dispatch = useDispatch();
     const courseData = useSelector(selectCourseData);
+    const errors = useSelector(selectValidationErrors);
     const {id: teacher_id, department: {id : dep_id}} = useSelector(selectUserData);
 
 useEffect(() => {
     dispatch(setId({teacher_id, dep_id}));
-
-    return () => {
-        dispatch(clearFields())
-    }
 }, [courseData]);
 
 const onChange = (e) => {
@@ -51,13 +49,17 @@ const validateFields = () => {
     <form onSubmit={onSendForm} className={classNames(classes.CourseCreationForm)}>
         <div>
             <label htmlFor="name">Название курса:</label>
-            <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
+            <Error message={errors?.name}>
+                <Input type="text" name="name" id="name" value={courseData.name} onChange={onChange}/>
+            </Error>
         </div>
         <div>
             <label htmlFor="term">Семестр:</label>
-            <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
+            <Error message={errors?.term}>
+                <Input type="text" name="term" id="term" value={courseData.term} onChange={onChange}/>
+            </Error>
         </div>
-        <Button>Создать</Button>
+        <ButtonLoader isLoading={status === STATUS.LOADING}>Создать</ButtonLoader>
     </form>
   )
 }

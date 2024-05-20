@@ -1,0 +1,36 @@
+@import "app/styles/variables.scss";
+
+
+.Item {
+    background-color: $thirdy-color;
+    height: 50px;
+    width: 500px;
+    border-radius: 5px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.ItemWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.edit {
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+}
+
+.delete {
+    height: 15px;
+    width: 15px;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: inherit;
+}

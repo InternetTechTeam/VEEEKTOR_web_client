@@ -1,0 +1,1 @@
+export const selectCourseStatus = state => state.courseCreation.status;

@@ -4,7 +4,7 @@ import newCourse from 'shared/assets/images/new.png'
 import { AppRoutes, routesPath } from 'shared/config/routeConfig';
 const NewCourseItem = () => {
   return (
-    <Link to={routesPath[AppRoutes.NEW_COURSE]} className={classes.courseItem}>
+    <Link to={routesPath[AppRoutes.CREATION_COURSE]} className={classes.courseItem}>
         <img className={classes.icon} src={newCourse} alt="new"/>
         <p className={classes.text}>Новый курс</p>
     </Link>

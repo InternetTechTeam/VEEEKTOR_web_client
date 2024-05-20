@@ -21,7 +21,7 @@ const CourseItemMenu = ({children, className, id}) => {
                 {children}
             </DropdownMenu>
         </div>
-      )
+    )
 }
 
 export default CourseItemMenu;

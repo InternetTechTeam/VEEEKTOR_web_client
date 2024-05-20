@@ -5,7 +5,7 @@ import { STATUS } from "../config";
 const initialState = {
     courses: [],
     currentCourse: undefined,
-    status: STATUS.IDLE,
+    status: STATUS.LOADING,
     error: null
 }
 

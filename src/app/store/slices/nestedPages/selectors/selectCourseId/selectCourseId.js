@@ -1,0 +1,1 @@
+export const selectCourseid = state => state.nestedPages.course_id;

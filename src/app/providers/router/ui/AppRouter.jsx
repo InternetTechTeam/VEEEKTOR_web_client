@@ -25,7 +25,7 @@ const AppRouter = () => {
     return (
         <Routes>
             {Object.values(routeConfig).map(({path, element, access}) => (
-            <Route key={path} path={path} element={
+            <Route exact={true} key={path} path={path} element={
                 <ProtectedRoute access={access} redirectPath={'/'}>
                   {element}
                 </ProtectedRoute>

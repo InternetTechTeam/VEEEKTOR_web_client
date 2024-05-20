@@ -1,0 +1,1 @@
+export const selectInfoStatus = state => state.info.status;

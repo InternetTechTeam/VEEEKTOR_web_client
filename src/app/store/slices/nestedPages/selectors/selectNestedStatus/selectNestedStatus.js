@@ -1,0 +1,1 @@
+export const selectNestedStatus = state => state.nestedPages.status;
