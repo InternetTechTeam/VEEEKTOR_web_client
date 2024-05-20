@@ -4,9 +4,10 @@ import {CourseEditingPage} from "pages/CourseEditingPage";
 import { CoursePage } from "pages/CoursePage";
 import { HomePage } from "pages/HomePage";
 import { InfoPage } from "pages/InfoPage";
-import LabPage from "pages/LabPage/ui/LabPage";
+import {LabPage} from "pages/LabPage";
 import { PersonalAreaPage } from "pages/PersonalAreaPage";
 import { TeacherHomePAge } from "pages/TeacherHomePage";
+import { TestPage } from "pages/TestPage";
 import { SignInForm } from "widgets/SIgnInForm";
 import { SignUpForm } from "widgets/SignUpForm";
 
@@ -71,7 +72,12 @@ export const routesPath = {
     [AppRoutes.LABS]: {
         BASE: '/courses/:course_id/labs',
         FULL: '/courses/:course_id/labs/:lab_id'
-    }
+    },
+
+    [AppRoutes.TESTS]: {
+        BASE: "/courses/:course_id/tests",
+        FULL: "/courses/:course_id/tests/:test_id"
+    },
 }
 
 export const routeConfig = {
@@ -135,4 +141,10 @@ export const routeConfig = {
         element: <LabPage/>,
         access: AccessFlags.AUTH_ONLY
     },
+
+    [AppRoutes.TESTS]: {
+        path: routesPath[AppRoutes.TESTS].FULL,
+        element: <TestPage/>,
+        access: AccessFlags.AUTH_ONLY
+    }
 }
