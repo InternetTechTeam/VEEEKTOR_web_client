@@ -11,23 +11,12 @@ import { STATUS } from 'app/store/slices/config';
 
 const MarkdownSplit = () => {
 
-  const dispatch = useDispatch();
-  const status = useSelector(selectEditingStatus);
-
-  const onSave = () => {
-      dispatch(updateCourse());
-  }
-
   return (
     <div className={classNames()}>
       <div className={classes.Split}>
         <MarkdownEditing/>
         <MarkdownPreview/>
       </div>
-      <ButtonLoader
-      onClick={onSave}
-      isLoading={status === STATUS.LOADING}
-      >Сохранить</ButtonLoader>
     </div>
   )
 }

@@ -9,7 +9,6 @@ import MdContent from "shared/md/MdContent/MdContent";
 import PageLoader from "shared/ui/PageLoader/PageLoader";
 
 const InfoPage = () => {
-
   const {info_id} = useParams();
   const dispatch = useDispatch();
   const status = useSelector(selectInfoStatus);

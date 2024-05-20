@@ -7,6 +7,7 @@ import courseCreationReducer from "./slices/newCourse/courseCreationSlice";
 import courseEditingReducer from "./slices/courseEditing/courseEditingSlice";
 import nestedPageReducer from "./slices/nestedPages/nestedPagesSlice";
 import infoReducer from "./slices/info/infoSlice";
+import labReducer from "./slices/lab/labSlice";
 
 
 const setupStore = () => {  
@@ -20,7 +21,8 @@ const setupStore = () => {
             courseEditing: courseEditingReducer,
             user: userReducer,
             nestedPages: nestedPageReducer,
-            info: infoReducer
+            info: infoReducer,
+            lab: labReducer,
         }
     });
 }
